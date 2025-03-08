@@ -98,7 +98,7 @@ const FinancialBlogPage = () => {
     : blogPosts.filter(post => post.category === activeCategory);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300 font-sans`}>
+    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300 `}>
       {/* Header */}
       <header className="bg-white dark:bg-gray-900 shadow-md py-4 sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-8">
