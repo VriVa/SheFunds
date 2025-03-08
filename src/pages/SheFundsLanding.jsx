@@ -77,7 +77,14 @@ export default function SheFundsLanding() {
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-3">
               <span className="text-white font-bold text-xl">S</span>
             </div>
-            <h1 className={`text-2xl font-extrabold ${darkMode ? "text-pink-300" : "text-pink-600"}`}>SheFunds</h1>
+
+             {/* Logo */}
+        <div >
+          <h1 className="text-2xl font-semibold">
+            <span className="font-bold">She</span>
+            <span className="text-pink-500 font-light">Funds</span>
+          </h1>
+        </div>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">

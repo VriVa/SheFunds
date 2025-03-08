@@ -1,7 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/shefundsdashboard");
+  };
+
   return (
     <div className="min-h-screen bg-pink-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <motion.div 
@@ -10,7 +17,13 @@ export default function SignUp() {
         transition={{ duration: 0.5 }}
         className="sm:mx-auto sm:w-full sm:max-w-md text-center"
       >
-        <h1 className="text-4xl font-extrabold text-pink-600">SheFunds</h1>
+         {/* Logo */}
+       
+          <h1 className="text-4xl font-semibold">
+            <span className="font-bold">She</span>
+            <span className="text-pink-500 font-light">Funds</span>
+          </h1>
+        
         <h2 className="mt-4 text-3xl font-bold text-gray-900">Create your account</h2>
         <p className="mt-2 text-sm text-gray-600">
           Already have an account?{' '}
@@ -27,7 +40,7 @@ export default function SignUp() {
         className="mt-8 sm:mx-auto sm:w-full sm:max-w-md"
       >
         <div className="bg-white py-8 px-6 shadow-lg rounded-lg sm:px-10">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {['Full Name', 'Email address', 'Password', 'Confirm Password'].map((label, index) => (
               <div key={index}>
                 <label className="block text-sm font-medium text-gray-700">{label}</label>

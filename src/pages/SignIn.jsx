@@ -1,7 +1,30 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();  // Initialize useNavigate
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Hardcoded credentials
+    const correctEmail = 'janedoe@gmail.com';
+    const correctPassword = '1234';
+
+    if (email === correctEmail && password === correctPassword) {
+      alert('Login successful! 🎉');
+      setError('');
+      navigate('/shefundsdashboard'); // Redirect to Dashboard.jsx
+    } else {
+      setError('Invalid email or password ❌');
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-pink-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Animation */}
@@ -18,7 +41,13 @@ export default function SignIn() {
         transition={{ duration: 0.5 }}
         className="sm:mx-auto sm:w-full sm:max-w-md text-center relative"
       >
-        <h1 className="text-4xl font-extrabold text-pink-600">SheFunds</h1>
+         {/* Logo */}
+         
+          <h1 className="text-5xl font-semibold">
+            <span className="font-bold">She</span>
+            <span className="text-pink-500 font-light">Funds</span>
+          </h1>
+        
         <h2 className="mt-4 text-3xl font-bold text-gray-900">Sign in to your account</h2>
         <p className="mt-2 text-sm text-gray-600">
           Or{' '}
@@ -35,40 +64,39 @@ export default function SignIn() {
         className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative"
       >
         <div className="bg-white py-8 px-6 shadow-lg rounded-lg sm:px-10">
-          <form className="space-y-6">
-            {['Email address', 'Password'].map((label, index) => (
-              <div key={index}>
-                <label className="block text-sm font-medium text-gray-700">{label}</label>
-                <div className="mt-1">
-                  <input
-                    type={label.includes('Password') ? 'password' : 'email'}
-                    required
-                    className="appearance-none block w-full px-3 py-2 border border-pink-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500"
-                  />
-                </div>
-              </div>
-            ))}
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Email Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email address</label>
+              <div className="mt-1">
                 <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-pink-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-pink-600 hover:text-pink-500">
-                  Forgot your password?
-                </a>
               </div>
             </div>
 
+            {/* Password Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <div className="mt-1">
+                <input
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-pink-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                />
+              </div>
+            </div>
+
+            {/* Error Message */}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+
+            {/* Submit Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

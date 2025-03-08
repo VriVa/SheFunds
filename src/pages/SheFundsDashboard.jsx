@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import { 
   Home, 
   BookOpen, 
@@ -14,7 +15,8 @@ import {
   Coffee,
   Briefcase,
   Moon,
-  Sun
+  Sun,
+  Calculator
 } from 'lucide-react';
 
 const SheFundsDashboard = () => {
@@ -48,25 +50,25 @@ const SheFundsDashboard = () => {
         <div className="flex-1 overflow-y-auto p-4">
           <nav className="space-y-2">
             {[
-              { icon: <Home size={20} />, label: 'Dashboard', active: true },
-              { icon: <BookOpen size={20} />, label: 'Courses' },
-              { icon: <PiggyBank size={20} />, label: 'Budgeting' },
-              { icon: <BarChart2 size={20} />, label: 'Investments' },
-              { icon: <Briefcase size={20} />, label: 'Funding' },
-              { icon: <Users size={20} />, label: 'Community' },
-              { icon: <Calendar size={20} />, label: 'Events' },
+              { icon: <Home size={20} />, label: 'Dashboard', path: '/' },
+              { icon: <BookOpen size={20} />, label: 'Investment Calculator', path: '/calculator' },
+              { icon: <Calculator size={20} />, label: 'Blog', path: '/blog' },
+              { icon: <Award size={20} />, label: 'Grants & Funding', path: '/grants' },
+              { icon: <Users size={20} />, label: 'Community', path: '/community' },
+              { icon: <BookOpen size={20} />, label: 'Literacy Courses', path: '/financialliteracycourses' },
             ].map((item) => (
-              <button
+              <Link
                 key={item.label}
+                to={item.path}
                 className={`flex items-center w-full p-2 rounded-md 
-                          ${item.active 
+                          ${window.location.pathname === item.path 
                             ? 'bg-pink-500 text-white' 
                             : `${darkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`
                           }`}
               >
                 <span className="mr-3">{item.icon}</span>
                 <span>{item.label}</span>
-              </button>
+              </Link>
             ))}
           </nav>
         </div>
@@ -141,9 +143,12 @@ const SheFundsDashboard = () => {
                     You're making great progress on your financial journey. Continue your course or check today's financial tips.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <button className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition">
+                    <Link
+                      to="/financialliteracycourses"
+                      className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition"
+                    >
                       Continue Learning
-                    </button>
+                    </Link>
                     <button className={`px-4 py-2 rounded-md border ${darkMode ? 'border-pink-500 text-pink-300' : 'border-pink-500 text-pink-500'} hover:bg-pink-50 dark:hover:bg-pink-900 transition`}>
                       View Financial Tips
                     </button>
@@ -193,9 +198,12 @@ const SheFundsDashboard = () => {
                   </div>
                 </div>
                 
-                <button className="w-full mt-6 py-2 text-pink-500 hover:text-pink-600 text-center">
+                <Link
+                  to="/financialliteracycourses"
+                  className="w-full mt-6 py-2 text-pink-500 hover:text-pink-600 text-center"
+                >
                   View All Courses
-                </button>
+                </Link>
               </div>
               
               <div className="space-y-6">
@@ -246,26 +254,34 @@ const SheFundsDashboard = () => {
                     title: "Budget Calculator", 
                     description: "Track your expenses and set monthly savings goals",
                     icon: <DollarSign size={24} />,
-                    badge: "Popular"
+                    badge: "Popular",
+                    path: "/calculator"
                   },
                   { 
                     title: "Investment Simulator", 
                     description: "Test investment strategies without real money risk",
-                    icon: <TrendingUp size={24} />
+                    icon: <TrendingUp size={24} />,
+                    path: "/calculator"
                   },
                   { 
                     title: "Loan Calculator", 
                     description: "Compare loan options and understand interest rates",
-                    icon: <Briefcase size={24} />
+                    icon: <Briefcase size={24} />,
+                    path: "/calculator"
                   },
                   { 
                     title: "Funding Database", 
                     description: "Explore grants and opportunities for women entrepreneurs",
                     icon: <Award size={24} />,
-                    badge: "New"
+                    badge: "New",
+                    path: "/grants"
                   }
                 ].map((tool, index) => (
-                  <div key={index} className={`rounded-lg overflow-hidden ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow flex flex-col`}>
+                  <Link
+                    key={index}
+                    to={tool.path}
+                    className={`rounded-lg overflow-hidden ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow flex flex-col`}
+                  >
                     <div className={`p-4 flex justify-center ${darkMode ? 'bg-pink-800' : 'bg-pink-100'}`}>
                       <div className={`p-3 rounded-md ${darkMode ? 'bg-pink-700' : 'bg-pink-50'} text-pink-500`}>
                         {tool.icon}
@@ -290,7 +306,7 @@ const SheFundsDashboard = () => {
                         Open Tool
                       </button>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -299,9 +315,9 @@ const SheFundsDashboard = () => {
             <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow`}>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold">Community Activity</h3>
-                <button className="text-pink-500 hover:text-pink-600">
+                <Link to="/community" className="text-pink-500 hover:text-pink-600">
                   View All
-                </button>
+                </Link>
               </div>
               
               <div className="space-y-6">

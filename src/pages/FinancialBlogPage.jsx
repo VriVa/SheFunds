@@ -107,9 +107,12 @@ const FinancialBlogPage = () => {
  transition={{ duration: 0.5 }}
  className="flex items-center"
  >
- <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500">
-SheFunds
- </div>
+    <div>
+ <h1 className="text-2xl font-semibold">
+            <span className="font-bold">She</span>
+            <span className="text-pink-500 font-light">Funds</span>
+          </h1>
+          </div>
  <span className="ml-2 px-3 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
  BLOG
  </span>
