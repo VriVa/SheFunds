@@ -11,7 +11,11 @@ import Community from './pages/Community';
 import BudgetInvestmentCalculator from './pages/BudgetInvestmentCalculator';
 import Grant from './pages/Grants';
 import FinancialBlogPage from './pages/FinancialBlogPage';
+<<<<<<< HEAD
 
+=======
+import Sidebar from './pages/Sidebar';
+>>>>>>> 978d46ce0cefccc12ff36cfda2dc0577463f69a6
 
 function App() {
   return (
@@ -24,11 +28,13 @@ function App() {
 function AppContent() {
   const location = useLocation();
 
-  // Show chatbot only if NOT on SignIn or SignUp pages
-  const showChatbot = location.pathname !== "/signin" && location.pathname !== "/signup";
+  // Show chatbot & sidebar only if NOT on SignIn, SignUp, or Landing page
+  const showChatbot = location.pathname !== "/signin" && location.pathname !== "/signup" && location.pathname !== "/";
+  const showSidebar = location.pathname !== "/signin" && location.pathname !== "/signup" && location.pathname !== "/";
 
   return (
     <>
+    
       {showChatbot && <LakshmiChatbot />}
       <Routes>
         <Route path="/" element={<SheFundsLanding />} />
