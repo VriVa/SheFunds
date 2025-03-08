@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaMoon, FaSun, FaChartLine, FaBook, FaUsers, FaLightbulb, FaSeedling, FaStar } from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
 export default function SheFundsLanding() {
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -88,11 +88,13 @@ export default function SheFundsLanding() {
           </div>
 
           <div className="flex items-center space-x-4">
+          <Link to="/signup">
             <button 
               className={`px-6 py-2 rounded-full font-medium ${darkMode ? "bg-pink-600 text-white" : "bg-pink-500 text-white"} hover:bg-pink-700 transition-colors`}
             >
               Sign Up
             </button>
+            </Link>
             <button 
               onClick={() => setDarkMode(!darkMode)} 
               className={`p-2 rounded-full ${darkMode ? "bg-gray-800" : "bg-gray-100"} shadow-sm`}
@@ -118,9 +120,12 @@ export default function SheFundsLanding() {
               Empowering women through financial education, community support, and tailored resources to build wealth and achieve independence.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+
+              <Link to="/signup">
               <button className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                 Start Your Journey
               </button>
+              </Link>
               <button className={`px-8 py-4 rounded-full border-2 ${darkMode ? "border-pink-600 text-pink-300" : "border-pink-500 text-pink-600"} font-semibold text-lg hover:shadow-lg transition-all`}>
                 Learn More
               </button>
@@ -255,9 +260,11 @@ export default function SheFundsLanding() {
                 placeholder="Your email address" 
                 className={`flex-grow px-6 py-3 rounded-full ${darkMode ? "bg-gray-800 border border-gray-600" : "bg-gray-100"} focus:outline-none focus:ring-2 focus:ring-pink-500`}
               />
+              <Link to="/signup">
               <button className="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all">
                 Subscribe
               </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -295,7 +302,7 @@ export default function SheFundsLanding() {
                 <li><a href="#" className="hover:text-pink-500 transition-colors">Financial Courses</a></li>
                 <li><a href="#" className="hover:text-pink-500 transition-colors">Budgeting Tools</a></li>
                 <li><a href="#" className="hover:text-pink-500 transition-colors">Investment Guide</a></li>
-                <li><a href="#" className="hover:text-pink-500 transition-colors">Retirement Planning</a></li>
+               
               </ul>
             </div>
             <div>

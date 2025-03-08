@@ -5,6 +5,8 @@ import LakshmiChatbot from './pages/LakshmiChatbot';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import SheFundsLanding from './pages/SheFundsLanding';
+import SheFundsDashboard from './pages/SheFundsDashboard';
+import FinancialLiteracyCoursesPage from './pages/FinancialLiteracyCourses';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function AppContent() {
         <Route path="/" element={<SheFundsLanding />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/shefundsdashboard" element={<SheFundsDashboard />} />
+        <Route path="/financialliteracycourses" element={<FinancialLiteracyCoursesPage />} />
       </Routes>
     </>
   );
