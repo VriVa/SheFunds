@@ -133,9 +133,10 @@ export default function SheFundsLanding() {
           </div>
           <div className="md:w-1/2">
             <img 
-              src="/api/placeholder/600/400" 
+              src="https://img.freepik.com/free-photo/office-workers-working-together-as-team_23-2149310907.jpg?t=st=1741424973~exp=1741428573~hmac=a0bdeaf94422fad0e56a0679a99e3b09942d676fdcebebe0066ed90a3423a032&w=1380"
+              //className="w-48 h-48 rounded-lg"
               alt="Women discussing finances" 
-              className="rounded-lg shadow-xl"
+              className="rounded-xl shadow-xl"
             />
           </div>
         </div>
