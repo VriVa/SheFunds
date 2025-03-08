@@ -11,11 +11,8 @@ import Community from './pages/Community';
 import BudgetInvestmentCalculator from './pages/BudgetInvestmentCalculator';
 import Grant from './pages/Grants';
 import FinancialBlogPage from './pages/FinancialBlogPage';
-<<<<<<< HEAD
 
-=======
 import Sidebar from './pages/Sidebar';
->>>>>>> 978d46ce0cefccc12ff36cfda2dc0577463f69a6
 
 function App() {
   return (
