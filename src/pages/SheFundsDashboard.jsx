@@ -50,7 +50,7 @@ const SheFundsDashboard = () => {
         <div className="flex-1 overflow-y-auto p-4">
           <nav className="space-y-2">
             {[
-              { icon: <Home size={20} />, label: 'Dashboard', path: '/' },
+              { icon: <Home size={20} />, label: 'Dashboard', path: '/SheFundsDashboard' },
               { icon: <BookOpen size={20} />, label: 'Investment Calculator', path: '/calculator' },
               { icon: <Calculator size={20} />, label: 'Blog', path: '/blog' },
               { icon: <Award size={20} />, label: 'Grants & Funding', path: '/grants' },
