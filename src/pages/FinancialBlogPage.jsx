@@ -97,28 +97,6 @@ const FinancialBlogPage = () => {
     ? blogPosts
     : blogPosts.filter(post => post.category === activeCategory);
 
-<<<<<<< HEAD
- return (
- <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300`}>
- <div className="container mx-auto px-4 py-8">
- <nav className="flex items-center justify-between mb-8">
- <motion.div
- initial={{ opacity: 0, y: -20 }}
- animate={{ opacity: 1, y: 0 }}
- transition={{ duration: 0.5 }}
- className="flex items-center"
- >
-    <div>
- <h1 className="text-2xl font-semibold">
-            <span className="font-bold">She</span>
-            <span className="text-pink-500 font-light">Funds</span>
-          </h1>
-          </div>
- <span className="ml-2 px-3 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
- BLOG
- </span>
- </motion.div>
-=======
   return (
     <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300 font-sans`}>
       {/* Header */}
@@ -162,7 +140,6 @@ const FinancialBlogPage = () => {
           </div>
         </div>
       </header>
->>>>>>> 978d46ce0cefccc12ff36cfda2dc0577463f69a6
 
       <main className="max-w-5xl mx-auto px-8 py-12">
         <motion.div

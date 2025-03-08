@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -10,7 +11,7 @@ const FinancialLiteracyCoursesPage = () => {
       id: 1,
       title: "Budgeting Basics",
       description: "Master the fundamentals of personal budgeting and take control of your financial future.",
-      image: "/api/placeholder/400/200",
+      image: "https://img.freepik.com/free-photo/high-angle-budget-wooden-blocks_23-2148543187.jpg?t=st=1741430462~exp=1741434062~hmac=143166cadb4bea1c9253e89bffd4f1e9561dee34bfd65383ba98f14fdd298ac1&w=1380",
       badge: "Budget Master",
       progress: 0,
       modules: [
@@ -24,7 +25,7 @@ const FinancialLiteracyCoursesPage = () => {
       id: 2,
       title: "Saving Strategies",
       description: "Learn effective techniques to build your savings and create financial security.",
-      image: "/api/placeholder/400/200",
+      image: "https://img.freepik.com/free-photo/hand-putting-coin-piggy-bank-growth-chart_23-2148780586.jpg?t=st=1741430532~exp=1741434132~hmac=4b2a380119699f39b181898f5eb013caedfa5d4212e106cf895ff881008d334a&w=1380",
       badge: "Savings Guru",
       progress: 0,
       modules: [
@@ -37,7 +38,7 @@ const FinancialLiteracyCoursesPage = () => {
       id: 3,
       title: "Investing for Your Future",
       description: "Discover how to grow your wealth through smart, long-term investment strategies.",
-      image: "/api/placeholder/400/200",
+      image: "https://img.freepik.com/free-vector/woman-examining-banknote-man-counting-coins-illustration_1262-18985.jpg?t=st=1741430588~exp=1741434188~hmac=99c6bd30fe8e2ef06d7e50f536e8f6ff701c9c154bf53700c97bd9343b74b96f&w=1380",
       badge: "Investment Pro",
       progress: 0,
       modules: [
@@ -52,7 +53,7 @@ const FinancialLiteracyCoursesPage = () => {
       id: 4,
       title: "Debt Management",
       description: "Take control of your debt with proven strategies to reduce and eliminate what you owe.",
-      image: "/api/placeholder/400/200",
+      image: "https://img.freepik.com/free-photo/debt-obligation-banking-finance-loan-money-concept_53876-127434.jpg?t=st=1741430631~exp=1741434231~hmac=fdc18a071c5b46f94b72aeae83ce5c1159bda9243597aab26ac69b0bbe93abb8&w=1380",
       badge: "Debt-Free Champion",
       progress: 0,
       modules: [
