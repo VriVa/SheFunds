@@ -71,82 +71,79 @@ export default function SheFundsLanding() {
   return (
     <div className={`${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"} min-h-screen transition-all duration-500`}>
       {/* Navbar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "py-2 bg-white/90 dark:bg-gray-900/90 shadow-lg backdrop-blur-sm" : "py-6 bg-transparent"}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-3">
-              <span className="text-white font-bold text-xl">S</span>
-            </div>
+      <nav className={`fixed w-full z-50 transition-all duration-300 shadow-md ${scrolled ? "py-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm" : "py-6 bg-transparent"}`}>
+  <div className="container mx-auto px-6 flex justify-between items-center">
+    <div className="flex items-center">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-3">
+        <span className="text-white font-bold text-xl">S</span>
+      </div>
 
-             {/* Logo */}
-        <div >
-          <h1 className="text-2xl font-semibold">
-            <span className="font-bold">She</span>
-            <span className="text-pink-500 font-light">Funds</span>
-          </h1>
-        </div>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="font-medium hover:text-pink-500 transition-colors">Features</a>
-            <a href="#testimonials" className="font-medium hover:text-pink-500 transition-colors">Testimonials</a>
-            <a href="#about" className="font-medium hover:text-pink-500 transition-colors">About Us</a>
-            <a href="#contact" className="font-medium hover:text-pink-500 transition-colors">Contact</a>
-          </div>
+      {/* Logo */}
+      <div>
+        <h1 className="text-2xl font-semibold">
+          <span className="font-bold">She</span>
+          <span className="text-pink-500 font-light">Funds</span>
+        </h1>
+      </div>
+    </div>
 
-          <div className="flex items-center space-x-4">
-          <Link to="/signup">
-            <button 
-              className={`px-6 py-2 rounded-full font-medium ${darkMode ? "bg-pink-600 text-white" : "bg-pink-500 text-white"} hover:bg-pink-700 transition-colors`}
-            >
-              Sign Up
-            </button>
-            </Link>
-            <button 
-              onClick={() => setDarkMode(!darkMode)} 
-              className={`p-2 rounded-full ${darkMode ? "bg-gray-800" : "bg-gray-100"} shadow-sm`}
-            >
-              {darkMode ? <FaSun className="text-yellow-300 text-xl" /> : <FaMoon className="text-gray-600 text-xl" />}
-            </button>
-          </div>
-        </div>
-      </nav>
+    <div className="hidden md:flex items-center space-x-8">
+      <a href="#features" className="font-medium hover:text-pink-500 transition-colors">Features</a>
+      <a href="#testimonials" className="font-medium hover:text-pink-500 transition-colors">Testimonials</a>
+      <a href="#about" className="font-medium hover:text-pink-500 transition-colors">About Us</a>
+      <a href="#contact" className="font-medium hover:text-pink-500 transition-colors">Contact</a>
+    </div>
+
+    <div className="flex items-center space-x-4">
+      <Link to="/signup">
+        <button 
+          className={`px-6 py-2 rounded-full font-medium ${darkMode ? "bg-pink-600 text-white" : "bg-pink-500 text-white"} hover:bg-pink-700 transition-colors`}
+        >
+          Sign Up
+        </button>
+      </Link>
+      <button 
+        onClick={() => setDarkMode(!darkMode)} 
+        className={`p-2 rounded-full ${darkMode ? "bg-gray-800" : "bg-gray-100"} shadow-sm`}
+      >
+        {darkMode ? <FaSun className="text-yellow-300 text-xl" /> : <FaMoon className="text-gray-600 text-xl" />}
+      </button>
+    </div>
+  </div>
+</nav>
+
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 md:pt-40 md:pb-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-bl from-pink-100 to-transparent opacity-60 dark:from-pink-900 dark:opacity-20 rounded-bl-full"></div>
         <div className="absolute bottom-0 left-0 -z-10 w-1/2 h-1/2 bg-gradient-to-tr from-purple-100 to-transparent opacity-60 dark:from-purple-900 dark:opacity-20 rounded-tr-full"></div>
         
-        <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 md:pr-12 mb-12 md:mb-0 text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-              <span className={`${darkMode ? "text-pink-300" : "text-pink-600"}`}>Financial Freedom</span> <br />
-              For Every Woman
-            </h1>
-            <p className="mt-6 text-lg md:text-xl max-w-lg mx-auto md:mx-0 leading-relaxed opacity-90">
-              Empowering women through financial education, community support, and tailored resources to build wealth and achieve independence.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <div className="mt-4 container mx-auto max-w-6xl flex flex-col items-center text-center">
+  <div className="md:w-3/4 lg:w-2/3 mb-0"> {/* Reduced bottom margin */}
+    <h1 className="text-7xl md:text-5xl lg:text-6xl font-extrabold leading-tight group transition-all">
+      <span className={`${darkMode ? "text-pink-300 group-hover:text-pink-400" : "text-pink-600 group-hover:text-pink-800"} transition-all`}>
+        Financial Freedom
+      </span> 
+      <br />
+      <span className="group-hover:text-opacity-80 transition-all">For Every Woman</span>
+    </h1>
+    <p className="mt-6 text-lg md:text-xl max-w-lg mx-auto leading-relaxed opacity-90 hover:opacity-100 transition-all">
+      Empowering women through financial education, community support, and tailored resources to build wealth and achieve independence.
+    </p>
+    <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+      <Link to="/signup">
+        <button className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+          Start Your Journey
+        </button>
+      </Link>
+      <button className={`px-8 py-4 rounded-full border-2 ${darkMode ? "border-pink-600 text-pink-300" : "border-pink-500 text-pink-600"} font-semibold text-lg hover:shadow-lg transition-all`}>
+        Learn More
+      </button>
+    </div>
+  </div>
+</div>
 
-              <Link to="/signup">
-              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                Start Your Journey
-              </button>
-              </Link>
-              <button className={`px-8 py-4 rounded-full border-2 ${darkMode ? "border-pink-600 text-pink-300" : "border-pink-500 text-pink-600"} font-semibold text-lg hover:shadow-lg transition-all`}>
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <img 
-              src="https://img.freepik.com/free-photo/office-workers-working-together-as-team_23-2149310907.jpg?t=st=1741424973~exp=1741428573~hmac=a0bdeaf94422fad0e56a0679a99e3b09942d676fdcebebe0066ed90a3423a032&w=1380"
-              //className="w-48 h-48 rounded-lg"
-              alt="Women discussing finances" 
-              className="rounded-xl shadow-xl"
-            />
-          </div>
-        </div>
+
       </section>
 
       {/* Stats Section */}
@@ -287,7 +284,10 @@ export default function SheFundsLanding() {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-2">
                   <span className="text-white font-bold text-sm">S</span>
                 </div>
-                <h3 className={`text-xl font-bold ${darkMode ? "text-pink-300" : "text-pink-600"}`}>SheFunds</h3>
+                <h3 className="text-2xl font-semibold">
+          <span className="font-bold">She</span>
+          <span className="text-pink-500 font-light">Funds</span>
+        </h3>
               </div>
               <p className="opacity-80 mb-4">
                 Empowering women to achieve financial freedom through education, community, and resources.

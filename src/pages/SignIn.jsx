@@ -32,7 +32,7 @@ export default function SignIn() {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ duration: 1 }}
-        className="absolute inset-0 bg-gradient-to-r from-pink-200 to-pink-100 opacity-50"
+        className="absolute inset-0 bg-gradient-to-r from-pink-100 to-pink-50 opacity-50"
       />
       
       <motion.div 
