@@ -100,54 +100,14 @@ const FinancialBlogPage = () => {
   return (
     <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300 `}>
       {/* Header */}
-      <header className="bg-white dark:bg-gray-900 shadow-md py-4 sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-8">
-          <div className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500 font-serif">
-                SheFunds
-              </div>
-              <span className="ml-2 px-3 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
-                BLOG
-              </span>
-            </motion.div>
-            
-            <div className="flex items-center space-x-6">
-              <nav className="hidden md:flex space-x-6">
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Home</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">About</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Courses</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Contact</a>
-              </nav>
-              
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full bg-pink-100 dark:bg-gray-800 hover:bg-pink-200 dark:hover:bg-gray-700 transition-colors duration-300"
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5 text-pink-500" />
-                ) : (
-                  <Moon className="h-5 w-5 text-pink-500" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
+      
       <main className="max-w-5xl mx-auto px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white font-serif">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white ">
             Success Stories & Insights
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 font-light">
@@ -185,7 +145,7 @@ const FinancialBlogPage = () => {
             className="mb-16"
           >
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white font-serif">Featured Stories</h2>
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white ">Featured Stories</h2>
               <button
                 onClick={() => setShowFeatured(false)}
                 className="text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 flex items-center"
@@ -218,7 +178,7 @@ const FinancialBlogPage = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300 font-serif">{post.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300 ">{post.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 font-light">{post.excerpt}</p>
                     <div className="flex justify-between items-center">
                       <div>
@@ -243,7 +203,7 @@ const FinancialBlogPage = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white font-serif">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white ">
             {activeCategory === 'All' ? 'Latest Articles' : activeCategory}
           </h2>
 
@@ -274,7 +234,7 @@ const FinancialBlogPage = () => {
                   </div>
                   <div className="md:w-2/3 p-6">
                     <motion.h3
-                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 font-serif"
+                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 "
                       whileHover={{ scale: 1.01 }}
                     >
                       {post.title}
@@ -329,7 +289,7 @@ const FinancialBlogPage = () => {
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-2/3 mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-white font-serif">Join Our Financial Community</h3>
+              <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-white ">Join Our Financial Community</h3>
               <p className="text-gray-700 dark:text-gray-200">Get weekly insights, success stories, and expert tips delivered straight to your inbox.</p>
             </div>
             <div className="md:w-1/3">
@@ -354,7 +314,7 @@ const FinancialBlogPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center mb-4">
-                <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500 font-serif">
+                <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500 ">
                   SheFunds
                 </div>
                 <span className="ml-2 px-2 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
