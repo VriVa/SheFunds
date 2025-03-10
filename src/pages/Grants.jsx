@@ -124,12 +124,16 @@ const Grants = () => {
   return (
     <div className={`min-h-screen p-6 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-800'}`}>
       <div className="max-w-6xl mx-auto">
-        <header className="mb-8">
-          <h1 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-pink-500' : 'text-pink-600'}`}>SheFunds Grant & Funding</h1>
-          <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
-            Connecting women entrepreneurs with the funding they deserve
-          </p>
-        </header>
+      <header className="mb-8">
+  <h1 className="text-3xl font-bold mb-2">
+    <span className="text-black dark:text-white">She</span>
+    <span className="text-pink-500 font-light">Funds</span> Grant & Funding
+  </h1>
+  <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+    Connecting women entrepreneurs with the funding they deserve
+  </p>
+</header>
+
         
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
