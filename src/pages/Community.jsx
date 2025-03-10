@@ -156,26 +156,7 @@ function Community() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-      <nav className="bg-white dark:bg-gray-800 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
-            >
-              <Award className="h-8 w-8 text-pink-500" />
-              <span className="text-2xl font-bold text-pink-500">SheFunds Community</span>
-            </motion.div>
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700"
-            >
-              {darkMode ? <Sun className="text-yellow-500" /> : <Moon className="text-gray-600" />}
-            </button>
-          </div>
-        </div>
-      </nav>
+      
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
