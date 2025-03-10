@@ -116,7 +116,7 @@ const BudgetInvestmentCalculator = () => {
  const budgetDistribution = getBudgetDistribution();
 
  return (
- <div className={`min-h-screen bg-gradient-to-br from-pink-50 to-white text-gray-800 p-4 transition-all duration-500 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+ <div className={`min-h-screen bg-white text-gray-800 p-4 transition-all duration-500 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
  <div className="max-w-6xl mx-auto">
  {/* Header */}
  <div className="text-center mb-10 transform transition-all duration-700 ease-in-out">

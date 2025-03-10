@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, ChevronRight, Heart, Share2, MessageCircle, BookOpen, Instagram, Twitter, Facebook, Linkedin, Mail } from 'lucide-react';
+import { Sun, Moon, ChevronRight, Heart, Share2, MessageCircle, BookOpen } from 'lucide-react';
 
 // Main App Component
 const FinancialBlogPage = () => {
@@ -98,76 +98,51 @@ const FinancialBlogPage = () => {
     : blogPosts.filter(post => post.category === activeCategory);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-pink-50'} transition-colors duration-300 `}>
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-900 shadow-md py-4 sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-8">
-          <div className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500 font-serif">
-                SheFunds
-              </div>
-              <span className="ml-2 px-3 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
-                BLOG
-              </span>
-            </motion.div>
-            
-            <div className="flex items-center space-x-6">
-              <nav className="hidden md:flex space-x-6">
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Home</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">About</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Courses</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 font-medium transition-colors duration-300">Contact</a>
-              </nav>
-              
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full bg-pink-100 dark:bg-gray-800 hover:bg-pink-200 dark:hover:bg-gray-700 transition-colors duration-300"
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5 text-pink-500" />
-                ) : (
-                  <Moon className="h-5 w-5 text-pink-500" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gradient-to-b from-pink-50 to-white'} transition-colors duration-300`}>
+      {/* Dark Mode Toggle Button */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={toggleDarkMode}
+          className="p-2 rounded-full bg-pink-100 dark:bg-gray-800 hover:bg-pink-200 dark:hover:bg-gray-700 transition-colors duration-300 shadow-md"
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {darkMode ? (
+            <Sun className="h-5 w-5 text-pink-500" />
+          ) : (
+            <Moon className="h-5 w-5 text-pink-500" />
+          )}
+        </button>
+      </div>
 
-      <main className="max-w-5xl mx-auto px-8 py-12">
+      <main className="max-w-6xl mx-auto px-8 py-16">
+        {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white font-serif">
-            Success Stories & Insights
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-800 dark:text-white font-serif">
+            Financial <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Success</span> Stories
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 font-light">
-            Real women, real financial journeys. Get inspired and educated.
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-light max-w-3xl mx-auto">
+            Real women, real financial journeys. Get inspired and educated by stories that empower your financial independence.
           </p>
         </motion.div>
 
-        {/* Categories */}
-        <div className="flex space-x-2 mb-12 overflow-x-auto py-2">
+        {/* Categories - Refined */}
+        <div className="flex justify-center space-x-3 mb-16 overflow-x-auto py-2">
           {categories.map((category, index) => (
             <motion.button
               key={category}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 * index }}
-              className={`px-4 py-2 rounded-full whitespace-nowrap ${
+              className={`px-5 py-2 rounded-full whitespace-nowrap ${
                 activeCategory === category
-                  ? 'bg-pink-500 text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-pink-100 dark:hover:bg-gray-700'
-              } transition-all duration-300 shadow-sm font-medium`}
+                  ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-pink-50 dark:hover:bg-gray-700 shadow'
+              } transition-all duration-300 font-medium`}
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -175,17 +150,20 @@ const FinancialBlogPage = () => {
           ))}
         </div>
 
-        {/* Featured Posts */}
+        {/* Featured Posts - Enhanced */}
         {showFeatured && activeCategory === 'All' && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-16"
+            className="mb-20"
           >
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white font-serif">Featured Stories</h2>
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white font-serif flex items-center">
+                <span className="h-px w-8 bg-pink-500 mr-3"></span> 
+                Featured Stories
+              </h2>
               <button
                 onClick={() => setShowFeatured(false)}
                 className="text-pink-500 hover:text-pink-600 dark:hover:text-pink-400 flex items-center"
@@ -213,7 +191,7 @@ const FinancialBlogPage = () => {
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                     />
-                    <div className="absolute top-4 right-4 bg-pink-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
                       {post.category}
                     </div>
                   </div>
@@ -236,14 +214,15 @@ const FinancialBlogPage = () => {
           </motion.div>
         )}
 
-        {/* All Blog Posts */}
+        {/* All Blog Posts - Refined */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white font-serif">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white font-serif flex items-center">
+            <span className="h-px w-8 bg-pink-500 mr-3"></span>
             {activeCategory === 'All' ? 'Latest Articles' : activeCategory}
           </h2>
 
@@ -257,7 +236,7 @@ const FinancialBlogPage = () => {
                 onMouseEnter={() => setHoverIndex(index)}
                 onMouseLeave={() => setHoverIndex(null)}
                 className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300
-                ${hoverIndex === index ? 'shadow-xl ring-2 ring-pink-300 dark:ring-pink-500' : ''}
+                ${hoverIndex === index ? 'shadow-xl ring-1 ring-pink-300 dark:ring-pink-500' : ''}
                 transform ${hoverIndex === index ? 'scale-102' : 'scale-100'}`}
               >
                 <div className="flex flex-col md:flex-row">
@@ -268,7 +247,7 @@ const FinancialBlogPage = () => {
                       className={`w-full h-full object-cover transition-transform duration-500
                       ${hoverIndex === index ? 'scale-110' : 'scale-100'}`}
                     />
-                    <div className="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                       {post.category}
                     </div>
                   </div>
@@ -320,99 +299,41 @@ const FinancialBlogPage = () => {
           </div>
         </motion.div>
 
-        {/* Newsletter Subscription */}
+        {/* Newsletter Subscription - Enhanced */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="py-12 px-8 bg-gradient-to-r from-pink-300 to-pink-200 dark:from-pink-900 dark:to-pink-800 rounded-2xl shadow-md"
+          className="py-16 px-10 bg-gradient-to-r from-pink-400 to-purple-600 dark:from-pink-900 dark:to-purple-800 rounded-2xl shadow-xl my-16"
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="md:w-2/3 mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold mb-2 text-gray-800 dark:text-white font-serif">Join Our Financial Community</h3>
-              <p className="text-gray-700 dark:text-gray-200">Get weekly insights, success stories, and expert tips delivered straight to your inbox.</p>
+            <div className="md:w-2/3 mb-8 md:mb-0">
+              <h3 className="text-3xl font-bold mb-4 text-white font-serif">Join Our Financial Community</h3>
+              <p className="text-white text-opacity-90 text-lg">Get weekly insights, success stories, and expert tips delivered straight to your inbox.</p>
             </div>
-            <div className="md:w-1/3">
+            <div className="md:w-1/3 w-full">
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="px-4 py-3 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-800 dark:text-white"
+                  className="px-4 py-3 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-white border-0 dark:bg-gray-800 dark:text-white"
                 />
-                <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-r-lg font-medium transition-colors duration-300">
+                <button className="bg-white text-pink-600 px-6 py-3 rounded-r-lg font-medium transition-colors duration-300 hover:bg-gray-100">
                   Subscribe
                 </button>
               </div>
+              <p className="text-white text-opacity-75 text-xs mt-2">We respect your privacy. Unsubscribe at any time.</p>
             </div>
           </div>
         </motion.div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white dark:bg-gray-900 py-12 mt-16 border-t border-gray-200 dark:border-gray-800">
-        <div className="max-w-5xl mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center mb-4">
-                <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600 dark:from-pink-300 dark:to-pink-500 font-serif">
-                  SheFunds
-                </div>
-                <span className="ml-2 px-2 py-1 rounded-full bg-pink-200 dark:bg-pink-800 text-pink-800 dark:text-pink-200 text-xs font-semibold">
-                  BLOG
-                </span>
-              </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 font-light">
-                Empowering women with the knowledge and confidence to take control of their financial future.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-500 hover:text-pink-500 dark:text-gray-400 dark:hover:text-pink-400 transition-colors duration-300">
-                  <Instagram className="h-5 w-5" />
-                </a>
-                <a href="#" className="text-gray-500 hover:text-pink-500 dark:text-gray-400 dark:hover:text-pink-400 transition-colors duration-300">
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a href="#" className="text-gray-500 hover:text-pink-500 dark:text-gray-400 dark:hover:text-pink-400 transition-colors duration-300">
-                  <Facebook className="h-5 w-5" />
-                </a>
-                <a href="#" className="text-gray-500 hover:text-pink-500 dark:text-gray-400 dark:hover:text-pink-400 transition-colors duration-300">
-                  <Linkedin className="h-5 w-5" />
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-4 uppercase text-sm tracking-wider">Resources</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Blog</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Podcast</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Free Guides</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Workshops</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-4 uppercase text-sm tracking-wider">Company</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">About Us</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Contact</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Careers</a></li>
-                <li><a href="#" className="text-gray-600 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors duration-300">Privacy Policy</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-200 dark:border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            <p>&copy; 2025 SheFunds. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
 
       {/* Floating "Back to Top" Button */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         whileHover={{ y: -5 }}
-        className="fixed bottom-8 right-8 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-300"
+        className="fixed bottom-8 right-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         <BookOpen className="h-6 w-6" />

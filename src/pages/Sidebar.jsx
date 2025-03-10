@@ -12,16 +12,36 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
-  const [activeItem, setActiveItem] = useState('dashboard');
+  const navigate = useNavigate();
+  const location = useLocation();
   
-  // Check system preference for dark mode
+  // Set activeItem based on current path
+  const getActiveItem = () => {
+    const path = location.pathname;
+    if (path.includes('shefundsdashboard')) return 'dashboard';
+    if (path.includes('calculator')) return 'calculator';
+    if (path.includes('blog')) return 'blog';
+    if (path.includes('grants')) return 'funding';
+    if (path.includes('community')) return 'community';
+    if (path.includes('financialliteracycourses')) return 'literacy';
+    return 'dashboard';
+  };
+  
+  const [activeItem, setActiveItem] = useState(getActiveItem());
+  
+  // Update active item when location changes
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setDarkMode(prefersDarkMode);
+    setActiveItem(getActiveItem());
+  }, [location]);
+  
+  // Default to light mode instead of checking system preference
+  useEffect(() => {
+    setDarkMode(false);
   }, []);
   
   const toggleDarkMode = () => {
@@ -41,6 +61,31 @@ const Sidebar = () => {
   const activeBg = darkMode ? 'bg-pink-800/30' : 'bg-pink-100/70';
   const borderColor = darkMode ? 'border-gray-800/50' : 'border-pink-200/50';
   const buttonBg = darkMode ? 'bg-pink-800' : 'bg-pink-500';
+  
+  const navigateTo = (path) => {
+    switch(path) {
+      case 'dashboard':
+        navigate('/shefundsdashboard');
+        break;
+      case 'calculator':
+        navigate('/calculator');
+        break;
+      case 'blog':
+        navigate('/blog');
+        break;
+      case 'funding':
+        navigate('/grants');
+        break;
+      case 'community':
+        navigate('/community');
+        break;
+      case 'literacy':
+        navigate('/financialliteracycourses');
+        break;
+      default:
+        navigate('/shefundsdashboard');
+    }
+  };
   
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <User size={20} /> },
@@ -92,7 +137,10 @@ const Sidebar = () => {
             {menuItems.map((item) => (
               <li key={item.id}>
                 <button
-                  onClick={() => setActiveItem(item.id)}
+                  onClick={() => {
+                    setActiveItem(item.id);
+                    navigateTo(item.id);
+                  }}
                   className={`w-full text-left flex items-center gap-3 p-2 rounded-lg transition-colors ${
                     activeItem === item.id ? activeBg : ''
                   } ${hoverBg} ${

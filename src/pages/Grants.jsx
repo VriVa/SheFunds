@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
-  Award, 
-  Calendar, 
-  CheckCircle, 
-  Search, 
-  Filter, 
-  ArrowRight, 
-  Sun, 
-  Moon,
-  Briefcase,
-  Building,
-  Globe,
-  Landmark
+  Award, Calendar, CheckCircle, Search, Filter, ArrowRight, 
+  Sun, Moon, Briefcase, Building, Globe, Landmark 
 } from 'lucide-react';
-import { Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Sample data with expanded funding types
 const sampleGrants = [
@@ -45,19 +35,7 @@ const industryData = [
 ];
 
 const locationOptions = ["United States", "Canada", "United Kingdom", "Europe", "Asia", "Australia", "Africa", "Latin America", "Global"];
-const industryOptions = [
-  "Technology", 
-  "Healthcare", 
-  "Sustainability", 
-  "Fashion", 
-  "Education", 
-  "E-commerce", 
-  "Social Enterprise", 
-  "Arts", 
-  "Retail", 
-  "General", 
-  "Other"
-];
+const industryOptions = ["Technology", "Healthcare", "Sustainability", "Fashion", "Education", "E-commerce", "Social Enterprise", "Arts", "Retail", "General", "Other"];
 const stageOptions = ["Idea", "Startup", "Growth", "Established"];
 const fundingTypeOptions = ["Grant", "Loan", "Equity Investment", "Competition", "Fellowship"];
 const sourceOptions = ["Government", "Corporate", "Non-profit", "Financial Institution", "Venture Capital", "Angel Investor", "Accelerator"];
@@ -66,26 +44,13 @@ const Grants = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
-    type: '',
-    minAmount: '',
-    maxAmount: '',
-    deadline: '',
-    fundingType: '',
-    source: ''
+    type: '', minAmount: '', maxAmount: '', deadline: '', fundingType: '', source: ''
   });
   const [showFilters, setShowFilters] = useState(false);
   const [eligibilityForm, setEligibilityForm] = useState({
-    industry: '',
-    location: '',
-    stage: '',
-    businessType: '',
-    fundingPreference: ''
+    industry: '', location: '', stage: '', businessType: '', fundingPreference: ''
   });
   const [recommendations, setRecommendations] = useState([]);
-  
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
   
   // Calculate days remaining for deadline
   const calculateDaysRemaining = (deadlineDate) => {
@@ -133,23 +98,27 @@ const Grants = () => {
   
   // Theme colors based on mode
   const themeColors = darkMode ? {
-    primary: 'bg-pink-700',
-    secondary: 'bg-black',
-    text: 'text-white',
-    accent: 'text-pink-500',
-    accentHover: 'hover:bg-pink-800',
-    card: 'bg-gray-900',
-    input: 'bg-gray-800 border-gray-700',
-    progressBg: 'bg-gray-700'
+    primary: 'bg-pink-700', secondary: 'bg-black', text: 'text-white',
+    accent: 'text-pink-500', accentHover: 'hover:bg-pink-800',
+    card: 'bg-gray-900', input: 'bg-gray-800 border-gray-700',
+    chartColor: '#d53f8c', chartTextColor: '#ffffff'
   } : {
-    primary: 'bg-pink-500',
-    secondary: 'bg-white',
-    text: 'text-gray-800',
-    accent: 'text-pink-600',
-    accentHover: 'hover:bg-pink-600',
-    card: 'bg-pink-50',
-    input: 'bg-white border-pink-200',
-    progressBg: 'bg-pink-100'
+    primary: 'bg-pink-500', secondary: 'bg-white', text: 'text-gray-800',
+    accent: 'text-pink-600', accentHover: 'hover:bg-pink-600',
+    card: 'bg-pink-50', input: 'bg-white border-pink-200',
+    chartColor: '#ec4899', chartTextColor: '#4a5568'
+  };
+  
+  // Function to get funding type icon
+  const getFundingIcon = (fundingType) => {
+    switch(fundingType) {
+      case 'Grant': return <Award size={16} className={darkMode ? 'text-pink-500' : 'text-pink-600'} />;
+      case 'Loan': return <Landmark size={16} className={darkMode ? 'text-pink-500' : 'text-pink-600'} />;
+      case 'Equity Investment': return <Building size={16} className={darkMode ? 'text-pink-500' : 'text-pink-600'} />;
+      case 'Competition':
+      case 'Fellowship': return <Briefcase size={16} className={darkMode ? 'text-pink-500' : 'text-pink-600'} />;
+      default: return <Globe size={16} className={darkMode ? 'text-pink-500' : 'text-pink-600'} />;
+    }
   };
   
   return (
@@ -157,41 +126,41 @@ const Grants = () => {
       <div className="max-w-6xl mx-auto">
         <header className="mb-8">
           <h1 className={`text-3xl font-bold mb-2 ${darkMode ? 'text-pink-500' : 'text-pink-600'}`}>SheFunds Grant & Funding</h1>
-          <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
             Connecting women entrepreneurs with the funding they deserve
           </p>
         </header>
         
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md`}>
+          <div className={`p-6 rounded-lg ${themeColors.card} shadow-md`}>
             <div className="flex items-center mb-4">
-              <Award size={24} className={`${darkMode ? 'text-pink-500' : 'text-pink-600'} mr-2`} />
+              <Award size={24} className={`${themeColors.accent} mr-2`} />
               <h2 className="text-xl font-semibold">Total Grants Available</h2>
             </div>
-            <p className={`text-3xl font-bold ${darkMode ? 'text-pink-500' : 'text-pink-600'}`}>{sampleGrants.length}</p>
+            <p className={`text-3xl font-bold ${themeColors.accent}`}>{sampleGrants.length}</p>
             <p className={`mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Total funding: ${sampleGrants.reduce((sum, grant) => sum + grant.amount, 0).toLocaleString()}
             </p>
           </div>
           
-          <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md`}>
+          <div className={`p-6 rounded-lg ${themeColors.card} shadow-md`}>
             <div className="flex items-center mb-4">
-              <Calendar size={24} className={`${darkMode ? 'text-pink-500' : 'text-pink-600'} mr-2`} />
+              <Calendar size={24} className={`${themeColors.accent} mr-2`} />
               <h2 className="text-xl font-semibold">Upcoming Deadlines</h2>
             </div>
-            <p className={`text-3xl font-bold ${darkMode ? 'text-pink-500' : 'text-pink-600'}`}>{upcomingDeadlines.length}</p>
+            <p className={`text-3xl font-bold ${themeColors.accent}`}>{upcomingDeadlines.length}</p>
             <p className={`mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Next deadline: {upcomingDeadlines[0]?.deadline}
             </p>
           </div>
           
-          <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md`}>
+          <div className={`p-6 rounded-lg ${themeColors.card} shadow-md`}>
             <div className="flex items-center mb-4">
-              <CheckCircle size={24} className={`${darkMode ? 'text-pink-500' : 'text-pink-600'} mr-2`} />
+              <CheckCircle size={24} className={`${themeColors.accent} mr-2`} />
               <h2 className="text-xl font-semibold">Successful Applications</h2>
             </div>
-            <p className={`text-3xl font-bold ${darkMode ? 'text-pink-500' : 'text-pink-600'}`}>1,240</p>
+            <p className={`text-3xl font-bold ${themeColors.accent}`}>1,240</p>
             <p className={`mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Success rate: 68%
             </p>
@@ -199,7 +168,7 @@ const Grants = () => {
         </div>
         
         {/* Search and Filters */}
-        <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md mb-8`}>
+        <div className={`p-6 rounded-lg ${themeColors.card} shadow-md mb-8`}>
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-grow">
               <Search size={18} className="absolute left-3 top-3 text-gray-500" />
@@ -213,7 +182,7 @@ const Grants = () => {
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center justify-center px-4 py-2 ${darkMode ? 'bg-pink-700' : 'bg-pink-500'} text-white rounded-md ${darkMode ? 'hover:bg-pink-800' : 'hover:bg-pink-600'}`}
+              className={`flex items-center justify-center px-4 py-2 ${themeColors.primary} text-white rounded-md ${themeColors.accentHover}`}
             >
               <Filter size={18} className="mr-2" />
               Filters
@@ -228,12 +197,10 @@ const Grants = () => {
                   <select
                     value={filters.type}
                     onChange={(e) => setFilters({...filters, type: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                    className={`w-full p-2 rounded-md border ${themeColors.input}`}
                   >
                     <option value="">All Industries</option>
-                    {industryOptions.map(option => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                    {industryOptions.map(option => <option key={option} value={option}>{option}</option>)}
                   </select>
                 </div>
                 
@@ -242,12 +209,10 @@ const Grants = () => {
                   <select
                     value={filters.fundingType}
                     onChange={(e) => setFilters({...filters, fundingType: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                    className={`w-full p-2 rounded-md border ${themeColors.input}`}
                   >
                     <option value="">All Funding Types</option>
-                    {fundingTypeOptions.map(option => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                    {fundingTypeOptions.map(option => <option key={option} value={option}>{option}</option>)}
                   </select>
                 </div>
                 
@@ -256,43 +221,11 @@ const Grants = () => {
                   <select
                     value={filters.source}
                     onChange={(e) => setFilters({...filters, source: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                    className={`w-full p-2 rounded-md border ${themeColors.input}`}
                   >
                     <option value="">All Sources</option>
-                    {sourceOptions.map(option => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
+                    {sourceOptions.map(option => <option key={option} value={option}>{option}</option>)}
                   </select>
-                </div>
-                
-                <div>
-                  <label className="block mb-1 text-sm">Min Amount ($)</label>
-                  <input
-                    type="number"
-                    value={filters.minAmount}
-                    onChange={(e) => setFilters({...filters, minAmount: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
-                  />
-                </div>
-                
-                <div>
-                  <label className="block mb-1 text-sm">Max Amount ($)</label>
-                  <input
-                    type="number"
-                    value={filters.maxAmount}
-                    onChange={(e) => setFilters({...filters, maxAmount: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
-                  />
-                </div>
-                
-                <div>
-                  <label className="block mb-1 text-sm">Deadline Before</label>
-                  <input
-                    type="date"
-                    value={filters.deadline}
-                    onChange={(e) => setFilters({...filters, deadline: e.target.value})}
-                    className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
-                  />
                 </div>
               </div>
             </div>
@@ -303,37 +236,17 @@ const Grants = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main content - Grants List */}
           <div className="lg:col-span-2">
-            <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md mb-8`}>
+            <div className={`p-6 rounded-lg ${themeColors.card} shadow-md mb-8`}>
               <h2 className="text-xl font-semibold mb-4">Available Funding Opportunities</h2>
               
               {filteredGrants.length === 0 ? (
                 <p className="py-4 text-center">No funding opportunities matching your criteria.</p>
               ) : (
                 <div className="space-y-4">
-                  {filteredGrants.map(grant => {
+                  {filteredGrants.slice(0, 5).map(grant => {
                     const daysRemaining = calculateDaysRemaining(grant.deadline);
                     const urgencyColor = daysRemaining < 7 ? 'bg-red-500' : 
                                         daysRemaining < 14 ? 'bg-yellow-500' : 'bg-green-500';
-                    
-                    // Funding type icon
-                    let FundingIcon;
-                    switch(grant.fundingType) {
-                      case 'Grant':
-                        FundingIcon = Award;
-                        break;
-                      case 'Loan':
-                        FundingIcon = Landmark;
-                        break;
-                      case 'Equity Investment':
-                        FundingIcon = Building;
-                        break;
-                      case 'Competition':
-                      case 'Fellowship':
-                        FundingIcon = Briefcase;
-                        break;
-                      default:
-                        FundingIcon = Globe;
-                    }
                     
                     return (
                       <div 
@@ -343,13 +256,13 @@ const Grants = () => {
                         <div className="flex justify-between items-start">
                           <div className="flex-grow">
                             <div className="flex items-center">
-                              <FundingIcon size={16} className={`${darkMode ? 'text-pink-500' : 'text-pink-600'} mr-2`} />
-                              <span className={`text-sm ${darkMode ? 'text-pink-400' : 'text-pink-500'}`}>{grant.fundingType}</span>
+                              {getFundingIcon(grant.fundingType)}
+                              <span className={`ml-2 text-sm ${darkMode ? 'text-pink-400' : 'text-pink-500'}`}>{grant.fundingType}</span>
                               <span className="mx-2 text-sm">•</span>
                               <span className="text-sm">{grant.source}</span>
                             </div>
                             <h3 className="font-semibold text-lg mt-1">{grant.name}</h3>
-                            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                            <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
                               ${grant.amount.toLocaleString()} • {grant.type}
                             </p>
                             <p className="text-sm mt-1">
@@ -376,30 +289,40 @@ const Grants = () => {
               )}
             </div>
             
-            {/* Industry Funding Distribution Chart */}
-            <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md mb-8`}>
+            {/* Industry Funding Distribution Chart - Using Recharts */}
+            <div className={`p-6 rounded-lg ${themeColors.card} shadow-md mb-8`}>
               <h2 className="text-xl font-semibold mb-4">Funding Distribution by Industry</h2>
               <div className="h-64">
-                {/* Simple visualization of the distribution */}
-                <div className="flex h-48 items-end space-x-1">
-                  {industryData.map((item) => (
-                    <div key={item.name} className="flex flex-col items-center flex-grow">
-                      <div 
-                        className={`w-full ${darkMode ? 'bg-pink-700' : 'bg-pink-500'} rounded-t-sm`} 
-                        style={{ height: `${item.value * 2}%` }}
-                      ></div>
-                      <p className="text-xs mt-2 text-center overflow-hidden text-ellipsis w-full">{item.name}</p>
-                      <p className="text-xs font-semibold">{item.value}%</p>
-                    </div>
-                  ))}
-                </div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={industryData}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <XAxis 
+                      dataKey="name" 
+                      tick={{ fill: themeColors.chartTextColor, fontSize: 12 }}
+                      tickLine={{ stroke: themeColors.chartTextColor }}
+                    />
+                    <YAxis 
+                      label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', fill: themeColors.chartTextColor } }} 
+                      tick={{ fill: themeColors.chartTextColor }}
+                      tickLine={{ stroke: themeColors.chartTextColor }}
+                    />
+                    <Tooltip 
+                      formatter={(value) => [`${value}%`, 'Funding']}
+                      labelStyle={{ color: darkMode ? '#fff' : '#000' }}
+                      contentStyle={{ backgroundColor: darkMode ? '#333' : '#fff', border: `1px solid ${themeColors.chartColor}` }}
+                    />
+                    <Bar dataKey="value" fill={themeColors.chartColor} radius={[5, 5, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             </div>
           </div>
           
           {/* Sidebar - Eligibility Checker */}
           <div className="lg:col-span-1">
-            <div className={`p-6 rounded-lg ${darkMode ? themeColors.card : themeColors.card} shadow-md mb-8 sticky top-6`}>
+            <div className={`p-6 rounded-lg ${themeColors.card} shadow-md mb-8 sticky top-6`}>
               <h2 className="text-xl font-semibold mb-4">Grant Eligibility Checker</h2>
               <form onSubmit={handleEligibilityCheck}>
                 <div className="space-y-4">
@@ -409,12 +332,10 @@ const Grants = () => {
                       value={eligibilityForm.industry}
                       onChange={(e) => setEligibilityForm({...eligibilityForm, industry: e.target.value})}
                       required
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                      className={`w-full p-2 rounded-md border ${themeColors.input}`}
                     >
                       <option value="">Select Industry</option>
-                      {industryOptions.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))}
+                      {industryOptions.map(option => <option key={option} value={option}>{option}</option>)}
                     </select>
                   </div>
                   
@@ -424,12 +345,10 @@ const Grants = () => {
                       value={eligibilityForm.location}
                       onChange={(e) => setEligibilityForm({...eligibilityForm, location: e.target.value})}
                       required
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                      className={`w-full p-2 rounded-md border ${themeColors.input}`}
                     >
                       <option value="">Select Location</option>
-                      {locationOptions.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))}
+                      {locationOptions.map(option => <option key={option} value={option}>{option}</option>)}
                     </select>
                   </div>
                   
@@ -439,57 +358,16 @@ const Grants = () => {
                       value={eligibilityForm.stage}
                       onChange={(e) => setEligibilityForm({...eligibilityForm, stage: e.target.value})}
                       required
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
+                      className={`w-full p-2 rounded-md border ${themeColors.input}`}
                     >
                       <option value="">Select Stage</option>
-                      {stageOptions.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))}
+                      {stageOptions.map(option => <option key={option} value={option}>{option}</option>)}
                     </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block mb-1 text-sm">Funding Preference</label>
-                    <select
-                      value={eligibilityForm.fundingPreference}
-                      onChange={(e) => setEligibilityForm({...eligibilityForm, fundingPreference: e.target.value})}
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
-                    >
-                      <option value="">No Preference</option>
-                      {fundingTypeOptions.map(option => (
-                        <option key={option} value={option}>{option}</option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block mb-1 text-sm">Business Type</label>
-                    <select
-                      value={eligibilityForm.businessType}
-                      onChange={(e) => setEligibilityForm({...eligibilityForm, businessType: e.target.value})}
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-pink-200'}`}
-                    >
-                      <option value="">Select Business Type</option>
-                      <option value="Women-owned">Women-owned</option>
-                      <option value="Social Enterprise">Social Enterprise</option>
-                      <option value="Sustainable">Sustainable Business</option>
-                      <option value="Minority-owned">Minority-owned</option>
-                      <option value="Rural">Rural Business</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block mb-1 text-sm">Password</label>
-                    <input
-                      type="password"
-                      placeholder="Enter password"
-                      className={`w-full p-2 rounded-md border ${darkMode ? 'bg-gray-700 border-gray-600 text-black' : 'bg-white border-pink-200'}`}
-                    />
                   </div>
                   
                   <button
                     type="submit"
-                    className={`w-full py-2 ${darkMode ? 'bg-pink-700 hover:bg-pink-800' : 'bg-pink-500 hover:bg-pink-600'} text-white rounded-md flex items-center justify-center`}
+                    className={`w-full py-2 ${themeColors.primary} text-white rounded-md flex items-center justify-center ${themeColors.accentHover}`}
                   >
                     <span>Check Eligibility</span>
                     <ArrowRight size={16} className="ml-2" />
@@ -516,7 +394,7 @@ const Grants = () => {
                         <p>${grant.amount.toLocaleString()}</p>
                         <div className="mt-1 flex justify-between items-center">
                           <span className="text-xs">Deadline: {new Date(grant.deadline).toLocaleDateString()}</span>
-                          <button className={`text-xs ${darkMode ? 'text-pink-500' : 'text-pink-600'} hover:underline`}>Apply</button>
+                          <button className={`text-xs ${themeColors.accent} hover:underline`}>Apply</button>
                         </div>
                       </div>
                     ))}
@@ -531,7 +409,7 @@ const Grants = () => {
       {/* Dark Mode Toggle - Fixed at bottom */}
       <div className="fixed bottom-6 right-6">
         <button
-          onClick={toggleDarkMode}
+          onClick={() => setDarkMode(!darkMode)}
           className={`p-3 rounded-full shadow-lg ${darkMode ? 'bg-pink-700' : 'bg-pink-200'}`}
           aria-label="Toggle dark mode"
         >
