@@ -122,7 +122,7 @@ const FinancialBlogPage = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-800 dark:text-white font-serif">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-800 dark:text-white ">
             Financial <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Success</span> Stories
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-light max-w-3xl mx-auto">
@@ -160,7 +160,7 @@ const FinancialBlogPage = () => {
             className="mb-20"
           >
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white font-serif flex items-center">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white  flex items-center">
                 <span className="h-px w-8 bg-pink-500 mr-3"></span> 
                 Featured Stories
               </h2>
@@ -196,7 +196,7 @@ const FinancialBlogPage = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300 font-serif">{post.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300 ">{post.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 font-light">{post.excerpt}</p>
                     <div className="flex justify-between items-center">
                       <div>
@@ -221,7 +221,7 @@ const FinancialBlogPage = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-20"
         >
-          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white font-serif flex items-center">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white  flex items-center">
             <span className="h-px w-8 bg-pink-500 mr-3"></span>
             {activeCategory === 'All' ? 'Latest Articles' : activeCategory}
           </h2>
@@ -253,7 +253,7 @@ const FinancialBlogPage = () => {
                   </div>
                   <div className="md:w-2/3 p-6">
                     <motion.h3
-                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 font-serif"
+                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 "
                       whileHover={{ scale: 1.01 }}
                     >
                       {post.title}
@@ -308,7 +308,7 @@ const FinancialBlogPage = () => {
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-2/3 mb-8 md:mb-0">
-              <h3 className="text-3xl font-bold mb-4 text-white font-serif">Join Our Financial Community</h3>
+              <h3 className="text-3xl font-bold mb-4 text-white ">Join Our Financial Community</h3>
               <p className="text-white text-opacity-90 text-lg">Get weekly insights, success stories, and expert tips delivered straight to your inbox.</p>
             </div>
             <div className="md:w-1/3 w-full">
