@@ -123,11 +123,14 @@ const Sidebar = () => {
         
         {/* Logo and brand */}
         <div className={`p-4 border-b ${borderColor} flex items-center gap-3`}>
-          <div className={`w-10 h-10 rounded-lg ${buttonBg} flex items-center justify-center text-white font-bold`}>
-            SF
-          </div>
+        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center ">
+                  <span className="text-white font-bold text-sm">S</span>
+                </div>
           {isOpen && (
-            <span className="font-bold text-xl whitespace-nowrap truncate">SheFunds</span>
+            <h3 className="text-2xl font-semibold">
+            <span className="font-bold">She</span>
+            <span className="text-pink-500 font-light">Funds</span>
+          </h3>
           )}
         </div>
         

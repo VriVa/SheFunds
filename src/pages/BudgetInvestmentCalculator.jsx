@@ -120,7 +120,7 @@ const BudgetInvestmentCalculator = () => {
  <div className="max-w-6xl mx-auto">
  {/* Header */}
  <div className="text-center mb-10 transform transition-all duration-700 ease-in-out">
- <h1 className="text-4xl font-bold text-pink-600 mb-2">Budgeting & Investment Calculators</h1>
+ <h1 className=" mt-8 text-4xl font-bold text-pink-600 mb-2">Budgeting & Investment Calculators</h1>
  <p className="text-gray-600">Plan your financial future with our easy-to-use tools</p>
  </div>
 
