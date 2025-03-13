@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { 
   Award, Calendar, CheckCircle, Search, Filter, ArrowRight, 
-  Sun, Moon, Briefcase, Building, Globe, Landmark 
+  Briefcase, Building, Globe, Landmark, Bell
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { ThemeContext } from '../context/ThemeContext'; // Import the context
 
 // Sample data with expanded funding types
 const sampleGrants = [
@@ -41,16 +42,18 @@ const fundingTypeOptions = ["Grant", "Loan", "Equity Investment", "Competition",
 const sourceOptions = ["Government", "Corporate", "Non-profit", "Financial Institution", "Venture Capital", "Angel Investor", "Accelerator"];
 
 const Grants = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
+  // Use the ThemeContext instead of local state
+  const { darkMode } = useContext(ThemeContext);
+  
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [filters, setFilters] = React.useState({
     type: '', minAmount: '', maxAmount: '', deadline: '', fundingType: '', source: ''
   });
-  const [showFilters, setShowFilters] = useState(false);
-  const [eligibilityForm, setEligibilityForm] = useState({
+  const [showFilters, setShowFilters] = React.useState(false);
+  const [eligibilityForm, setEligibilityForm] = React.useState({
     industry: '', location: '', stage: '', businessType: '', fundingPreference: ''
   });
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = React.useState([]);
   
   // Calculate days remaining for deadline
   const calculateDaysRemaining = (deadlineDate) => {
@@ -96,7 +99,7 @@ const Grants = () => {
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
     .slice(0, 3);
   
-  // Theme colors based on mode
+  // Theme colors based on mode from context
   const themeColors = darkMode ? {
     primary: 'bg-pink-700', secondary: 'bg-black', text: 'text-white',
     accent: 'text-pink-500', accentHover: 'hover:bg-pink-800',
@@ -122,18 +125,44 @@ const Grants = () => {
   };
   
   return (
-    <div className={`min-h-screen p-6 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-800'}`}>
-      <div className="max-w-6xl mx-auto">
-      <header className="mb-8">
-  <h1 className="text-3xl font-bold mb-2">
-    <span className="text-black dark:text-white">She</span>
-    <span className="text-pink-500 font-light">Funds</span> Grant & Funding
-  </h1>
-  <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
-    Connecting women entrepreneurs with the funding they deserve
-  </p>
-</header>
+    <div className={`min-h-screen p-6 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
 
+        {/* Header - Changed to black */}
+    <header className={`fixed top-0 right-0 left-16 h-16 z-10 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
+        <div className="flex items-center">
+          <h1 className="text-lg font-semibold">
+            <span className={`${darkMode ? 'text-white' : 'text-gray-900'} font-bold ml-10`}>She</span>
+            <span className={`${darkMode ? 'text-pink-300' : 'text-pink-500'} font-light`}>Funds</span>
+          </h1>
+        </div>
+    
+        <div className="flex items-center space-x-4">
+          <button className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 hover:bg-gray-700 border-gray-700 text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-800'} border`}>
+            <Bell size={20} />
+          </button>
+    
+          <div className="flex items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${darkMode ? 'bg-pink-500 text-white' : 'bg-pink-400 text-white'}`}>
+              JD
+            </div>
+            <div className="ml-2 hidden md:block">
+              <div className={`${darkMode ? 'text-white' : 'text-gray-900'} text-sm font-semibold`}>Jane Doe</div>
+              <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'} text-xs`}>Financial Explorer</div>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <div className="max-w-6xl mx-auto mt-16">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">
+            <span className={darkMode ? 'text-white' : 'text-black'}>She</span>
+            <span className="text-pink-500 font-light">Funds</span> Grant & Funding
+          </h1>
+          <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+            Connecting women entrepreneurs with the funding they deserve
+          </p>
+        </header>
         
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -410,16 +439,7 @@ const Grants = () => {
         </div>
       </div>
       
-      {/* Dark Mode Toggle - Fixed at bottom */}
-      <div className="fixed bottom-6 right-6">
-        <button
-          onClick={() => setDarkMode(!darkMode)}
-          className={`p-3 rounded-full shadow-lg ${darkMode ? 'bg-pink-700' : 'bg-pink-200'}`}
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? <Sun size={20} className="text-white" /> : <Moon size={20} className="text-pink-800" />}
-        </button>
-      </div>
+      {/* The dark mode toggle button at the bottom has been removed */}
     </div>
   );
 };

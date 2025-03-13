@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 // SVG Icon Components
 const SendIcon = () => (
@@ -55,6 +56,9 @@ const RestoreIcon = () => (
 );
 
 const LakshmiChatbot = () => {
+  // Get dark mode from context
+  const { darkMode } = useContext(ThemeContext);
+  
   const [isOpen, setIsOpen] = useState(false);
   const [windowState, setWindowState] = useState('normal'); // 'minimized', 'normal', or 'maximized'
   const [language, setLanguage] = useState('english'); // 'english' or 'hindi'
@@ -250,9 +254,9 @@ const LakshmiChatbot = () => {
     }
   }, [isOpen, windowState]);
 
-  // Get class names based on window state
+  // Get class names based on window state and dark mode
   const getWindowClassNames = () => {
-    const baseClasses = "bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200 transition-all duration-300";
+    const baseClasses = `${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-lg shadow-2xl flex flex-col overflow-hidden border transition-all duration-300`;
     
     switch (windowState) {
       case 'minimized':
@@ -351,7 +355,7 @@ const LakshmiChatbot = () => {
           
           {/* Show minimized status message or full chat interface */}
           {windowState === 'minimized' ? (
-            <div className="flex-1 flex items-center justify-between px-4 text-sm text-gray-500">
+            <div className={`flex-1 flex items-center justify-between px-4 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
               <span>{content[language].minimized}</span>
               <span className="text-xs">
                 {messages.length > 1 ? `${messages.length - 1} message${messages.length > 2 ? 's' : ''}` : ''}
@@ -360,7 +364,7 @@ const LakshmiChatbot = () => {
           ) : (
             <>
               {/* Chat messages */}
-              <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+              <div className={`flex-1 overflow-y-auto p-4 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
                 {messages.map(message => (
                   <div 
                     key={message.id} 
@@ -369,18 +373,20 @@ const LakshmiChatbot = () => {
                     <div className={`max-w-3/4 rounded-lg p-3 ${
                       message.sender === 'user' 
                         ? 'bg-pink-500 text-white rounded-tr-none' 
-                        : 'bg-white text-gray-800 shadow-md rounded-tl-none'
+                        : darkMode 
+                          ? 'bg-gray-800 text-gray-100 shadow-md rounded-tl-none border border-gray-700' 
+                          : 'bg-white text-gray-800 shadow-md rounded-tl-none'
                     }`}>
                       {message.sender === 'bot' && (
                         <div className="flex items-center mb-1">
                           <div className="w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-1">
                             <span className="text-white text-xs font-bold">ल</span>
                           </div>
-                          <span className="text-xs font-semibold text-gray-600">Lakshmi</span>
+                          <span className={`text-xs font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Lakshmi</span>
                         </div>
                       )}
                       <p className="text-sm">{message.text}</p>
-                      <span className="text-xs opacity-70 mt-1 block text-right">
+                      <span className={`text-xs opacity-70 mt-1 block text-right ${darkMode && message.sender === 'bot' ? 'text-gray-400' : ''}`}>
                         {message.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                       </span>
                     </div>
@@ -391,17 +397,21 @@ const LakshmiChatbot = () => {
               
               {/* Suggested questions - only shown when showSuggestions is true */}
               {showSuggestions && (
-                <div className="p-2 bg-gray-50 border-t border-gray-200">
+                <div className={`p-2 ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'} border-t`}>
                   <div className="flex items-center mb-2">
-                    <QuestionIcon className="text-gray-500 mr-2" />
-                    <span className="text-xs text-gray-500">{content[language].suggestedTitle}</span>
+                    <QuestionIcon className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
+                    <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} ml-2`}>{content[language].suggestedTitle}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {content[language].faqs.map((faq, index) => (
                       <button
                         key={index}
                         onClick={() => handleFaqSelect(faq)}
-                        className="text-xs bg-white border border-gray-200 rounded-full px-3 py-1 text-gray-600 hover:bg-gray-100 transition-colors"
+                        className={`text-xs ${
+                          darkMode 
+                            ? 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700' 
+                            : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-100'
+                        } border rounded-full px-3 py-1 transition-colors`}
                       >
                         {faq}
                       </button>
@@ -411,8 +421,12 @@ const LakshmiChatbot = () => {
               )}
               
               {/* Input area */}
-              <div className="p-3 border-t border-gray-200 bg-white">
-                <div className="flex rounded-full border border-gray-300 overflow-hidden bg-gray-50 focus-within:ring-2 focus-within:ring-pink-500 focus-within:border-transparent">
+              <div className={`p-3 border-t ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+                <div className={`flex rounded-full overflow-hidden ${
+                  darkMode 
+                    ? 'bg-gray-900 border-gray-600 focus-within:ring-2 focus-within:ring-pink-500 focus-within:border-transparent' 
+                    : 'bg-gray-50 border-gray-300 focus-within:ring-2 focus-within:ring-pink-500 focus-within:border-transparent'
+                } border`}>
                   <input
                     ref={inputRef}
                     type="text"
@@ -420,14 +434,14 @@ const LakshmiChatbot = () => {
                     onChange={(e) => setInputText(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder={content[language].placeholder}
-                    className="flex-1 py-2 px-4 bg-transparent outline-none text-sm"
+                    className={`flex-1 py-2 px-4 bg-transparent outline-none text-sm ${darkMode ? 'text-gray-200 placeholder-gray-500' : 'text-gray-800 placeholder-gray-400'}`}
                   />
                   <button
                     onClick={handleSendMessage}
                     disabled={inputText.trim() === ''}
                     className={`px-3 flex items-center justify-center ${
                       inputText.trim() === '' 
-                        ? 'text-gray-400' 
+                        ? darkMode ? 'text-gray-600' : 'text-gray-400' 
                         : 'text-pink-500 hover:text-pink-600'
                     }`}
                   >
@@ -435,7 +449,7 @@ const LakshmiChatbot = () => {
                   </button>
                 </div>
                 <div className="text-center mt-2">
-                  <span className="text-xs text-gray-500">
+                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                     {content[language].poweredBy}
                   </span>
                 </div>

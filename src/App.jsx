@@ -12,6 +12,7 @@ import BudgetInvestmentCalculator from './pages/BudgetInvestmentCalculator';
 import Grant from './pages/Grants';
 import FinancialBlogPage from './pages/FinancialBlogPage';
 import Sidebar from './pages/Sidebar';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function AppContent() {
   const showSidebar = location.pathname !== "/signin" && location.pathname !== "/signup" && location.pathname !== "/";
   
   return (
+   <ThemeProvider>
     <div className="flex h-screen overflow-hidden">
       {showSidebar && <Sidebar />}
       <div className="flex-1 overflow-auto">
@@ -46,6 +48,7 @@ function AppContent() {
         </Routes>
       </div>
     </div>
+    </ThemeProvider>
   );
 }
 

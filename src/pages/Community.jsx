@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, MessageCircle, Heart, Share2, Award, Search, PieChart } from 'lucide-react';
+import { MessageCircle, Heart, Share2, Search, PieChart, Bell } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { ThemeContext } from '../context/ThemeContext'; // Import the context
 
 function Community() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode } = useContext(ThemeContext);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   
@@ -101,11 +102,6 @@ function Community() {
     }
   ]);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
-  };
-
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     post.content.toLowerCase().includes(searchTerm.toLowerCase())
@@ -155,10 +151,35 @@ function Community() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-      
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} transition-colors duration-200`}>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Header - Changed to black */}
+          <header className={`fixed top-0 right-0 left-16 h-16 z-10 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
+              <div className="flex items-center">
+                <h1 className="text-lg font-semibold">
+                  <span className={`${darkMode ? 'text-white' : 'text-gray-900'} font-bold ml-10`}>She</span>
+                  <span className={`${darkMode ? 'text-pink-300' : 'text-pink-500'} font-light`}>Funds</span>
+                </h1>
+              </div>
+          
+              <div className="flex items-center space-x-4">
+                <button className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 hover:bg-gray-700 border-gray-700 text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-800'} border`}>
+                  <Bell size={20} />
+                </button>
+          
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${darkMode ? 'bg-pink-500 text-white' : 'bg-pink-400 text-white'}`}>
+                    JD
+                  </div>
+                  <div className="ml-2 hidden md:block">
+                    <div className={`${darkMode ? 'text-white' : 'text-gray-900'} text-sm font-semibold`}>Jane Doe</div>
+                    <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'} text-xs`}>Financial Explorer</div>
+                  </div>
+                </div>
+              </div>
+            </header>
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-16">
         <div className="flex justify-between items-center mb-8">
           <div className="relative flex-1 max-w-lg">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -167,19 +188,22 @@ function Community() {
               placeholder="Search discussions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-800 dark:text-white"
+              className={`w-full pl-10 pr-4 py-2 rounded-lg border ${
+                darkMode ? 'border-gray-700 bg-gray-800 text-white' : 'border-gray-200'
+              } focus:outline-none focus:ring-2 focus:ring-pink-500`}
             />
           </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setShowModal(true)}
-            className="px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg 
-              font-medium shadow-md transition-colors ml-4"
-          >
-            Start Discussion
-          </motion.button>
+          <div className="flex items-center">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowModal(true)}
+              className="px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg 
+                font-medium shadow-md transition-colors"
+            >
+              Start Discussion
+            </motion.button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -195,6 +219,7 @@ function Community() {
                 post={post} 
                 onLike={() => handleLike(post.id)}
                 onVote={(optionId) => handleVote(post.id, optionId)}
+                darkMode={darkMode}
               />
             </motion.div>
           ))}
@@ -203,21 +228,21 @@ function Community() {
 
       <AnimatePresence>
         {showModal && (
-          <NewPostModal onClose={() => setShowModal(false)} onSubmit={addPost} />
+          <NewPostModal onClose={() => setShowModal(false)} onSubmit={addPost} darkMode={darkMode} />
         )}
       </AnimatePresence>
     </div>
   );
 }
 
-function PostCard({ post, onLike, onVote }) {
+function PostCard({ post, onLike, onVote, darkMode }) {
   const [showComments, setShowComments] = useState(false);
   const totalVotes = post.pollOptions?.reduce((sum, option) => sum + option.votes, 0) || 0;
 
   return (
     <motion.div
       whileHover={{ y: -4 }}
-      className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 mb-6"
+      className={`shadow-md rounded-xl p-6 mb-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
     >
       <div className="flex items-start space-x-4">
         <img
@@ -226,20 +251,22 @@ function PostCard({ post, onLike, onVote }) {
           className="w-12 h-12 rounded-full object-cover"
         />
         <div className="flex-1">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             {post.title}
             {post.type === 'poll' && (
-              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              <span className={`ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                darkMode ? 'bg-purple-900 text-purple-200' : 'bg-purple-100 text-purple-800'
+              }`}>
                 <PieChart className="w-3 h-3 mr-1" />
                 Poll
               </span>
             )}
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             Posted by {post.author} • {formatDistanceToNow(post.timestamp)} ago
           </p>
           
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
+          <p className={`mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             {post.content}
           </p>
 
@@ -253,21 +280,27 @@ function PostCard({ post, onLike, onVote }) {
                     onClick={() => onVote(option.id)}
                     className="w-full text-left"
                   >
-                    <div className="relative h-10 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <div className={`relative h-10 rounded-lg overflow-hidden ${
+                      darkMode ? 'bg-gray-700' : 'bg-gray-100'
+                    }`}>
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${percentage}%` }}
                         className="absolute top-0 left-0 h-full bg-pink-500 bg-opacity-20"
                       />
                       <div className="absolute top-0 left-0 h-full w-full px-4 flex items-center justify-between">
-                        <span className="text-gray-700 dark:text-gray-300">{option.text}</span>
-                        <span className="text-gray-500 dark:text-gray-400">{Math.round(percentage)}%</span>
+                        <span className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
+                          {option.text}
+                        </span>
+                        <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
+                          {Math.round(percentage)}%
+                        </span>
                       </div>
                     </div>
                   </button>
                 );
               })}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <p className={`text-sm mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 {totalVotes} votes total
               </p>
             </div>
@@ -277,8 +310,9 @@ function PostCard({ post, onLike, onVote }) {
             {post.tags.map(tag => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-full text-sm bg-pink-100 dark:bg-pink-900 
-                text-pink-800 dark:text-pink-200"
+                className={`px-3 py-1 rounded-full text-sm ${
+                  darkMode ? 'bg-pink-900 text-pink-200' : 'bg-pink-100 text-pink-800'
+                }`}
               >
                 {tag}
               </span>
@@ -291,7 +325,9 @@ function PostCard({ post, onLike, onVote }) {
               whileTap={{ scale: 0.9 }}
               onClick={onLike}
               className={`flex items-center space-x-2 ${
-                post.liked ? 'text-pink-500' : 'text-gray-500 hover:text-pink-500'
+                post.liked 
+                  ? 'text-pink-500' 
+                  : `${darkMode ? 'text-gray-400 hover:text-pink-500' : 'text-gray-500 hover:text-pink-500'}`
               } transition-colors`}
             >
               <Heart className={`w-5 h-5 ${post.liked ? 'fill-current' : ''}`} />
@@ -301,7 +337,9 @@ function PostCard({ post, onLike, onVote }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setShowComments(!showComments)}
-              className="flex items-center space-x-2 text-gray-500 hover:text-pink-500 transition-colors"
+              className={`flex items-center space-x-2 transition-colors ${
+                darkMode ? 'text-gray-400 hover:text-pink-500' : 'text-gray-500 hover:text-pink-500'
+              }`}
             >
               <MessageCircle className="w-5 h-5" />
               <span>{post.type === 'question' ? post.replies : post.comments?.length || 0}</span>
@@ -309,7 +347,9 @@ function PostCard({ post, onLike, onVote }) {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="flex items-center space-x-2 text-gray-500 hover:text-pink-500 transition-colors"
+              className={`flex items-center space-x-2 transition-colors ${
+                darkMode ? 'text-gray-400 hover:text-pink-500' : 'text-gray-500 hover:text-pink-500'
+              }`}
             >
               <Share2 className="w-5 h-5" />
               <span>Share</span>
@@ -336,22 +376,28 @@ function PostCard({ post, onLike, onVote }) {
                     className="w-8 h-8 rounded-full object-cover"
                   />
                   <div className="flex-1">
-                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg px-4 py-2">
-                      <p className="font-medium text-gray-900 dark:text-white">
+                    <div className={`rounded-lg px-4 py-2 ${
+                      darkMode ? 'bg-gray-700' : 'bg-gray-50'
+                    }`}>
+                      <p className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                         {comment.author}
                       </p>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
                         {comment.content}
                       </p>
                     </div>
                     <div className="flex items-center space-x-4 mt-1">
-                      <button className="text-sm text-gray-500 hover:text-pink-500">
+                      <button className={`text-sm ${
+                        darkMode ? 'text-gray-400 hover:text-pink-500' : 'text-gray-500 hover:text-pink-500'
+                      }`}>
                         Like
                       </button>
-                      <button className="text-sm text-gray-500 hover:text-pink-500">
+                      <button className={`text-sm ${
+                        darkMode ? 'text-gray-400 hover:text-pink-500' : 'text-gray-500 hover:text-pink-500'
+                      }`}>
                         Reply
                       </button>
-                      <span className="text-sm text-gray-400">
+                      <span className={`text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                         {formatDistanceToNow(comment.timestamp)} ago
                       </span>
                     </div>
@@ -366,7 +412,7 @@ function PostCard({ post, onLike, onVote }) {
   );
 }
 
-function NewPostModal({ onClose, onSubmit }) {
+function NewPostModal({ onClose, onSubmit, darkMode }) {
   const [postType, setPostType] = useState('question');
   const [formData, setFormData] = useState({
     title: '',
@@ -427,18 +473,14 @@ function NewPostModal({ onClose, onSubmit }) {
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
-        className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        className={`rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto ${
+          darkMode ? 'bg-gray-800' : 'bg-white'
+        }`}
       >
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             Start a New Discussion
           </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-          >
-            <Sun className="w-6 h-6" />
-          </button>
         </div>
 
         <div className="flex space-x-4 mb-6">
@@ -447,7 +489,9 @@ function NewPostModal({ onClose, onSubmit }) {
             className={`flex-1 py-2 rounded-lg flex items-center justify-center space-x-2 ${
               postType === 'question'
                 ? 'bg-pink-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                : darkMode 
+                  ? 'bg-gray-700 text-gray-300' 
+                  : 'bg-gray-100 text-gray-600'
             }`}
           >
             <MessageCircle className="w-5 h-5" />
@@ -458,7 +502,9 @@ function NewPostModal({ onClose, onSubmit }) {
             className={`flex-1 py-2 rounded-lg flex items-center justify-center space-x-2 ${
               postType === 'poll'
                 ? 'bg-pink-500 text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                : darkMode 
+                  ? 'bg-gray-700 text-gray-300' 
+                  : 'bg-gray-100 text-gray-600'
             }`}
           >
             <PieChart className="w-5 h-5" />
@@ -468,42 +514,57 @@ function NewPostModal({ onClose, onSubmit }) {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className={`block text-sm font-medium mb-1 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Your Name
             </label>
             <input
               type="text"
               value={formData.author}
               onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white"
+              className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                darkMode 
+                  ? 'border-gray-700 bg-gray-700 text-white' 
+                  : 'border-gray-200'
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className={`block text-sm font-medium mb-1 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Title
             </label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white"
+              className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                darkMode 
+                  ? 'border-gray-700 bg-gray-700 text-white' 
+                  : 'border-gray-200'
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className={`block text-sm font-medium mb-1 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               {postType === 'question' ? 'Question' : 'Content'}
             </label>
             <textarea
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white"
+              className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                darkMode 
+                  ? 'border-gray-700 bg-gray-700 text-white' 
+                  : 'border-gray-200'
+              }`}
               rows="4"
               required
             />
@@ -511,7 +572,9 @@ function NewPostModal({ onClose, onSubmit }) {
 
           {postType === 'poll' && (
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={`block text-sm font-medium ${
+                darkMode ? 'text-gray-300' : 'text-gray-700'
+              }`}>
                 Poll Options
               </label>
               {formData.pollOptions.map((option) => (
@@ -521,8 +584,11 @@ function NewPostModal({ onClose, onSubmit }) {
                     value={option.text}
                     onChange={(e) => updatePollOption(option.id, e.target.value)}
                     placeholder="Enter option"
-                    className="flex-1 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                      focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white"
+                    className={`flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                      darkMode 
+                        ? 'border-gray-700 bg-gray-700 text-white' 
+                        : 'border-gray-200'
+                    }`}
                     required
                   />
                   {formData.pollOptions.length > 1 && (
@@ -549,15 +615,20 @@ function NewPostModal({ onClose, onSubmit }) {
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className={`block text-sm font-medium mb-1 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Tags (comma-separated)
             </label>
             <input
               type="text"
               value={formData.tags}
               onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-              className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 
-                focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-white"
+              className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500 ${
+                darkMode 
+                  ? 'border-gray-700 bg-gray-700 text-white' 
+                  : 'border-gray-200'
+              }`}
               placeholder="e.g., investing, savings, retirement"
               required
             />
@@ -567,8 +638,11 @@ function NewPostModal({ onClose, onSubmit }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 
-                dark:hover:text-white transition-colors"
+              className={`px-4 py-2 transition-colors ${
+                darkMode 
+                  ? 'text-gray-300 hover:text-white' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
             >
               Cancel
             </button>

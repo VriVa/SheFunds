@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Calculator, 
@@ -13,12 +13,15 @@ import {
   Moon
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext'; // Import the ThemeContext
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Use the global dark mode context instead of local state
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   
   // Set activeItem based on current path
   const getActiveItem = () => {
@@ -39,22 +42,13 @@ const Sidebar = () => {
     setActiveItem(getActiveItem());
   }, [location]);
   
-  // Default to light mode instead of checking system preference
-  useEffect(() => {
-    setDarkMode(false);
-  }, []);
-  
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-  
   const sidebarVariants = {
     open: { width: '240px' },
     closed: { width: '72px' }
   };
   
   // Using semi-transparent backgrounds so page content is visible behind the sidebar
-  const bgColor = darkMode ? 'bg-black/90' : 'bg-white/90'; 
+  const bgColor = darkMode ? 'bg-gray-800' : 'bg-white/90'; 
   const textColor = darkMode ? 'text-white' : 'text-gray-800';
   const accentColor = darkMode ? 'text-pink-800' : 'text-pink-500';
   const hoverBg = darkMode ? 'hover:bg-gray-900/50' : 'hover:bg-pink-50/70';
@@ -162,7 +156,7 @@ const Sidebar = () => {
           </ul>
         </div>
         
-        {/* Dark mode toggle */}
+        {/* Dark mode toggle - now using global context */}
         <div className={`p-4 border-t ${borderColor}`}>
           <button 
             onClick={toggleDarkMode} 

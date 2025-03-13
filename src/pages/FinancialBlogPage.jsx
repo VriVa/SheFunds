@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, ChevronRight, Heart, Share2, MessageCircle, BookOpen } from 'lucide-react';
+import {ChevronRight, Heart, Share2, MessageCircle, BookOpen, Bell } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext'; // Import the context
 
 // Main App Component
 const FinancialBlogPage = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [hoverIndex, setHoverIndex] = useState(null);
-  const [showFeatured, setShowFeatured] = useState(true);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  // Use the context instead of local state
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const [activeCategory, setActiveCategory] = React.useState('All');
+  const [hoverIndex, setHoverIndex] = React.useState(null);
+  const [showFeatured, setShowFeatured] = React.useState(true);
 
   const categories = ['All', 'Success Stories', 'Investments', 'Budgeting', 'Career Growth'];
 
@@ -99,22 +89,35 @@ const FinancialBlogPage = () => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gradient-to-b from-pink-50 to-white'} transition-colors duration-300`}>
-      {/* Dark Mode Toggle Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={toggleDarkMode}
-          className="p-2 rounded-full bg-pink-100 dark:bg-gray-800 hover:bg-pink-200 dark:hover:bg-gray-700 transition-colors duration-300 shadow-md"
-          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          {darkMode ? (
-            <Sun className="h-5 w-5 text-pink-500" />
-          ) : (
-            <Moon className="h-5 w-5 text-pink-500" />
-          )}
-        </button>
-      </div>
+    
+    {/* Header - Changed to black */}
+    <header className={`fixed top-0 right-0 left-16 h-16 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
+        <div className="flex items-center">
+          <h1 className="text-lg font-semibold">
+            <span className={`${darkMode ? 'text-white' : 'text-gray-900'} font-bold ml-10`}>She</span>
+            <span className={`${darkMode ? 'text-pink-300' : 'text-pink-500'} font-light`}>Funds</span>
+          </h1>
+        </div>
+    
+        <div className="flex items-center space-x-4">
+          <button className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 hover:bg-gray-700 border-gray-700 text-white' : 'bg-gray-200 hover:bg-gray-300 border-gray-300 text-gray-800'} border`}>
+            <Bell size={20} />
+          </button>
+    
+          <div className="flex items-center">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${darkMode ? 'bg-pink-500 text-white' : 'bg-pink-400 text-white'}`}>
+              JD
+            </div>
+            <div className="ml-2 hidden md:block">
+              <div className={`${darkMode ? 'text-white' : 'text-gray-900'} text-sm font-semibold`}>Jane Doe</div>
+              <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'} text-xs`}>Financial Explorer</div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-      <main className="max-w-6xl mx-auto px-8 py-16">
+      <main className="max-w-6xl mx-auto px-8 py-16 mt-16">
+        {/* Rest of your component remains the same */}
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -160,7 +163,7 @@ const FinancialBlogPage = () => {
             className="mb-20"
           >
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white  flex items-center">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center">
                 <span className="h-px w-8 bg-pink-500 mr-3"></span> 
                 Featured Stories
               </h2>
@@ -196,7 +199,7 @@ const FinancialBlogPage = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300 ">{post.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-white transition-colors duration-300">{post.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 font-light">{post.excerpt}</p>
                     <div className="flex justify-between items-center">
                       <div>
@@ -221,7 +224,7 @@ const FinancialBlogPage = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-20"
         >
-          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white  flex items-center">
+          <h2 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white flex items-center">
             <span className="h-px w-8 bg-pink-500 mr-3"></span>
             {activeCategory === 'All' ? 'Latest Articles' : activeCategory}
           </h2>
@@ -253,7 +256,7 @@ const FinancialBlogPage = () => {
                   </div>
                   <div className="md:w-2/3 p-6">
                     <motion.h3
-                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300 "
+                      className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-white transition-colors duration-300"
                       whileHover={{ scale: 1.01 }}
                     >
                       {post.title}
@@ -308,7 +311,7 @@ const FinancialBlogPage = () => {
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-2/3 mb-8 md:mb-0">
-              <h3 className="text-3xl font-bold mb-4 text-white ">Join Our Financial Community</h3>
+              <h3 className="text-3xl font-bold mb-4 text-white">Join Our Financial Community</h3>
               <p className="text-white text-opacity-90 text-lg">Get weekly insights, success stories, and expert tips delivered straight to your inbox.</p>
             </div>
             <div className="md:w-1/3 w-full">
