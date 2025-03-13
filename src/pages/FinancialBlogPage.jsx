@@ -217,7 +217,7 @@ const FinancialBlogPage = () => {
           </motion.div>
         )}
 
-        {/* All Blog Posts - Refined */}
+   
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -302,7 +302,7 @@ const FinancialBlogPage = () => {
           </div>
         </motion.div>
 
-        {/* Newsletter Subscription - Enhanced */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -331,7 +331,7 @@ const FinancialBlogPage = () => {
         </motion.div>
       </main>
 
-      {/* Floating "Back to Top" Button */}
+      
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

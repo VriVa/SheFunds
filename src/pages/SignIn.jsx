@@ -95,7 +95,7 @@ export default function SignIn() {
         </div>
       </nav>
 
-      {/* Main content - Add padding-top to create space for the fixed navbar */}
+      
       <div className="flex-1 flex flex-col justify-center pt-24 pb-12 sm:px-6 lg:px-8">
         {/* Background Animation */}
         <motion.div 

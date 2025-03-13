@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ArrowRight, DollarSign, PieChart, TrendingUp, Save, PiggyBank, BarChart3, RefreshCw, Bell} from 'lucide-react';
-import { ThemeContext } from '../context/ThemeContext'; // Import the context
+import { ThemeContext } from '../context/ThemeContext'; 
 
 const BudgetInvestmentCalculator = () => {
- // Theme context
+
  const { darkMode } = useContext(ThemeContext);
 
  // State management for active tab
@@ -69,7 +69,7 @@ const BudgetInvestmentCalculator = () => {
    return Math.round(futureValue);
  };
 
- // Add new expense
+
  const addExpense = () => {
    if (newCategory && newAmount && !isNaN(parseFloat(newAmount))) {
      setExpenses([
@@ -108,7 +108,7 @@ const BudgetInvestmentCalculator = () => {
    // Calculate percentage and color for each expense
    return expenses.map((expense, index) => {
      const percentage = Math.round((expense.amount / totalExpenses) * 100);
-     // In dark mode, adjust colors to be slightly brighter
+     
      const colorIntensity = darkMode ? 
        `bg-pink-${Math.max(300, 400 + index * 100)}` : 
        `bg-pink-${Math.max(200, 300 + index * 100)}`;
@@ -123,9 +123,9 @@ const BudgetInvestmentCalculator = () => {
  const budgetDistribution = getBudgetDistribution();
 
  return (
-   <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'} p-4 transition-all duration-200 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+   <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'} p-4 transition-all duration-500 ease-in-out`}>
 
-      {/* Header - Changed to black */}
+      
     <header className={`fixed top-0 right-0 left-16 h-16 z-10 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
         <div className="flex items-center">
           <h1 className="text-lg font-semibold">
@@ -515,31 +515,38 @@ const BudgetInvestmentCalculator = () => {
 
  {/* Results Section */}
  <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-6 transform transition-all hover:shadow-xl`}>
- <h2 className={`text-2xl font-semibold ${darkMode ? 'text-pink-500' : 'text-pink-600'} mb-4 flex items-center`}>
- <PieChart className="mr-2" /> Investment Projection
- </h2>
-
- <div className="space-y-6">
- <div className="bg-pink-50 p-6 rounded-xl text-center">
- <h3 className={`text-lg font-medium ${darkMode ? 'text-gray-700' : 'text-gray-700'} mb-3`}> Estimated Future Value </h3>
- <div className={`text-5xl font-bold ${darkMode ? 'text-pink-600' : 'text-pink-600'} mb-2`}>
- ${calculateInvestmentResult().toLocaleString()}
- </div>
- <p className={`${darkMode ? 'text-gray-600' : 'text-gray-600'}`}>years</p>
-
- <div className={`mt-4 pt-4 border-t ${darkMode ? 'border-gray-600' : 'border-pink-200'}`}>
- <div className="grid grid-cols-2 gap-4">
- <div>
- <p className={`${darkMode ? 'text-gray-500' : 'text-gray-500'} text-sm`}>Initial investment</p>
- <p className="font-medium">${initialInvestment.toLocaleString()}</p>
- </div>
- <div>
- <p className={`${darkMode ? 'text-gray-500' : 'text-gray-500'} text-sm`}>Total contributions</p>
- <p className="font-medium">${(monthlyContribution * 12 * investmentYears).toLocaleString()}</p>
- </div>
- </div>
- </div>
- </div>
+  <h2 className={`text-2xl font-semibold ${darkMode ? 'text-pink-500' : 'text-pink-600'} mb-4 flex items-center`}>
+    <PieChart className="mr-2" /> Investment Projection
+  </h2>
+  
+  <div className="space-y-6">
+    <div className={`${darkMode ? 'bg-gray-700' : 'bg-pink-50'} p-6 rounded-xl text-center`}>
+      <h3 className={`text-lg font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'} mb-3`}>
+        Estimated Future Value
+      </h3>
+      <div className={`text-5xl font-bold ${darkMode ? 'text-pink-400' : 'text-pink-600'} mb-2`}>
+        ${calculateInvestmentResult().toLocaleString()}
+      </div>
+      <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>years</p>
+      
+      <div className={`mt-4 pt-4 border-t ${darkMode ? 'border-gray-600' : 'border-pink-200'}`}>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'} text-sm`}>Initial investment</p>
+            <p className={`font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+              ${initialInvestment.toLocaleString()}
+            </p>
+          </div>
+          <div>
+            <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'} text-sm`}>Total contributions</p>
+            <p className={`font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+              ${(monthlyContribution * 12 * investmentYears).toLocaleString()}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
 
  <div className={`${darkMode ? 'bg-gray-700' : 'bg-pink-50'} p-4 rounded-xl`}>
  <h3 className={`text-lg font-medium ${darkMode ? 'text-gray-200' : 'text-gray-700'} mb-3`}>Investment Tips</h3>

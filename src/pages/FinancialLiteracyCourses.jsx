@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { ThemeContext } from '../context/ThemeContext'; // Adjust the import path as needed
+import { ThemeContext } from '../context/ThemeContext'; 
 import { Bell } from 'lucide-react';
 
 const FinancialLiteracyCoursesPage = () => {
@@ -75,7 +75,7 @@ const FinancialLiteracyCoursesPage = () => {
   };
 
   const markModuleComplete = (moduleId) => {
-    // In a real app, this would call an API to update progress
+   
     console.log(`Module ${moduleId} marked as complete`);
   };
 

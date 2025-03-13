@@ -30,8 +30,7 @@ export default function SignUp() {
     };
   }, []);
 
-  // Calculate navbar height based on scrolled state
-  const navbarHeight = scrolled ? "64px" : "88px"; // Approximate heights (py-2 vs py-6)
+  const navbarHeight = scrolled ? "64px" : "88px"; 
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-pink-50'} flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>

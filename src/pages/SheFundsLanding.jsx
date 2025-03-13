@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext'; // Import the context
 
 export default function SheFundsLanding() {
-  // Use the theme context instead of local state
+
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll for navbar effect
+ 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -115,7 +115,7 @@ export default function SheFundsLanding() {
         </div>
       </nav>
 
-      {/* Rest of your component remains the same */}
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 md:pt-40 md:pb-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-bl from-pink-100 to-transparent opacity-60 dark:from-pink-900 dark:opacity-20 rounded-bl-full"></div>

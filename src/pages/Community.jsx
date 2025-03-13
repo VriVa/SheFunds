@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Heart, Share2, Search, PieChart, Bell } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import { ThemeContext } from '../context/ThemeContext'; // Import the context
+import { ThemeContext } from '../context/ThemeContext'; 
 
 function Community() {
   const { darkMode } = useContext(ThemeContext);

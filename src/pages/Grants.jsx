@@ -42,7 +42,7 @@ const fundingTypeOptions = ["Grant", "Loan", "Equity Investment", "Competition",
 const sourceOptions = ["Government", "Corporate", "Non-profit", "Financial Institution", "Venture Capital", "Angel Investor", "Accelerator"];
 
 const Grants = () => {
-  // Use the ThemeContext instead of local state
+  
   const { darkMode } = useContext(ThemeContext);
   
   const [searchTerm, setSearchTerm] = React.useState('');
@@ -78,7 +78,7 @@ const Grants = () => {
            matchesDeadline && matchesFundingType && matchesSource;
   });
   
-  // Handle eligibility form submission
+ 
   const handleEligibilityCheck = (e) => {
     e.preventDefault();
     
@@ -99,7 +99,7 @@ const Grants = () => {
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
     .slice(0, 3);
   
-  // Theme colors based on mode from context
+  
   const themeColors = darkMode ? {
     primary: 'bg-pink-700', secondary: 'bg-black', text: 'text-white',
     accent: 'text-pink-500', accentHover: 'hover:bg-pink-800',
@@ -127,7 +127,7 @@ const Grants = () => {
   return (
     <div className={`min-h-screen p-6 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
 
-        {/* Header - Changed to black */}
+        {/* Header  */}
     <header className={`fixed top-0 right-0 left-16 h-16 z-10 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
         <div className="flex items-center">
           <h1 className="text-lg font-semibold">
@@ -353,7 +353,7 @@ const Grants = () => {
             </div>
           </div>
           
-          {/* Sidebar - Eligibility Checker */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className={`p-6 rounded-lg ${themeColors.card} shadow-md mb-8 sticky top-6`}>
               <h2 className="text-xl font-semibold mb-4">Grant Eligibility Checker</h2>
@@ -439,7 +439,7 @@ const Grants = () => {
         </div>
       </div>
       
-      {/* The dark mode toggle button at the bottom has been removed */}
+      
     </div>
   );
 };

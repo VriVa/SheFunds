@@ -12,7 +12,7 @@ import {
 import { ThemeContext } from '../context/ThemeContext';
 
 const SheFundsDashboard = () => {
-  // Use the global theme context instead of local state
+ 
   const { darkMode } = useContext(ThemeContext);
   
   return (
@@ -47,7 +47,7 @@ const SheFundsDashboard = () => {
       {/* Main content area */}
       <main className={`flex-1 overflow-y-auto p-6 mt-16 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-800'}`}>
         <div className="space-y-6">
-          {/* Welcome Section - Changed to grey */}
+          {/* Welcome Section */}
           <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white'}`}>
             <div className="md:flex md:justify-between">
               <div className="md:w-2/3">
