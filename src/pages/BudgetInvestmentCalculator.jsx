@@ -585,7 +585,7 @@ const BudgetInvestmentCalculator = () => {
  <p className={darkMode ? 'text-gray-400' : 'text-gray-500'}>This calculator is for educational purposes only. Consult with a financial advisor for personalized advice.</p>
  </div>
 
- {/* Add custom CSS for styled scrollbar */}
+ {/**/}
  <style jsx>{`
  .styled-scrollbar::-webkit-scrollbar {
  width: 6px;

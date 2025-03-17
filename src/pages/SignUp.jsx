@@ -83,7 +83,7 @@ export default function SignUp() {
         </div>
       </nav>
       
-      {/* Main content - Add padding top to create space for the navbar */}
+      {/* Main content  */}
       <div style={{ paddingTop: "50px" }} className="flex flex-col flex-grow justify-center">
         <motion.div 
           initial={{ opacity: 0, y: -20 }} 
