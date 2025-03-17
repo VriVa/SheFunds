@@ -151,8 +151,7 @@ function Community() {
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} transition-colors duration-200`}>
-
+<div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'} transition-colors duration-200`}>
       {/* Header - Changed to black */}
           <header className={`fixed top-0 right-0 left-16 h-16 z-10 flex items-center justify-between px-6 ${darkMode ? 'bg-gray-800' : 'bg-pink-100'}`}>
               <div className="flex items-center">
@@ -179,8 +178,8 @@ function Community() {
               </div>
             </header>
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-16">
-        <div className="flex justify-between items-center mb-8">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 mt-16 flex-grow pb-16">       
+               <div className="flex justify-between items-center mb-8">
           <div className="relative flex-1 max-w-lg">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input

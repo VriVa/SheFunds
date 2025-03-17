@@ -74,7 +74,7 @@ export default function SheFundsLanding() {
   return (
     <div className={`${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"} min-h-screen transition-all duration-500`}>
       {/* Navbar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 shadow-md ${scrolled ? "py-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm" : "py-6 bg-transparent"}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 shadow-md ${scrolled ? "py-2" : "py-6"} ${darkMode ? "bg-gray-900" : "bg-white"}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-3">

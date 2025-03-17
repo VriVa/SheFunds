@@ -10,7 +10,8 @@ import {
   Menu, 
   X,
   Sun,
-  Moon
+  Moon,
+  LogOut
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext'; 
@@ -75,6 +76,9 @@ const Sidebar = () => {
         break;
       case 'literacy':
         navigate('/financialliteracycourses');
+        break;
+      case 'logout':
+        navigate('/');
         break;
       default:
         navigate('/shefundsdashboard');
@@ -153,6 +157,21 @@ const Sidebar = () => {
                 </button>
               </li>
             ))}
+            
+            {/* Logout button */}
+            <li>
+              <button
+                onClick={() => navigateTo('logout')}
+                className={`w-full text-left flex items-center gap-3 p-2 rounded-lg transition-colors ${hoverBg} ${textColor}`}
+              >
+                <span className={textColor}>
+                  <LogOut size={20} />
+                </span>
+                {isOpen && (
+                  <span className="flex-1 truncate">Log Out</span>
+                )}
+              </button>
+            </li>
           </ul>
         </div>
         

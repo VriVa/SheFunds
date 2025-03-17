@@ -35,8 +35,8 @@ export default function SignUp() {
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-pink-50'} flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
       {/* Navbar - Fixed at top */}
-      <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 shadow-md ${scrolled ? "py-2 bg-white/90 dark:bg-gray-900 backdrop-blur-sm" : "py-6 bg-transparent"}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
+      <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 shadow-md ${scrolled ? "py-2" : "py-6"} ${darkMode ? "bg-gray-900" : "bg-white"}`}>
+         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center mr-3">
               <span className="text-white font-bold text-xl">S</span>
